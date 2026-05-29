@@ -10,6 +10,7 @@
     --font-mono: 'Courier New', Courier, monospace;
     --copper-strap: linear-gradient(90deg, #5c2c16 0%, #b45309 30%, #3a1a0b 45%, #b45309 70%, #1c0d06 100%);
 }
+
 /* === BRUTALIST SYSTEM NAVBAR === */
 .system-nav {
     position: fixed;
@@ -40,7 +41,7 @@
 .nav-status-indicator {
     width: 6px;
     height: 6px;
-    background-color: #22c55e; /* Stable green pulse */
+    background-color: #22c55e;
     border-radius: 50%;
     box-shadow: 0 0 8px #22c55e;
     animation: terminal-flicker 0.5s infinite alternate;
@@ -93,13 +94,9 @@
     box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
 }
 
-/* Offset your main body container so the fixed navbar doesn't clip your content */
+/* Offset body container so fixed navbar doesn't clip content */
 body {
     padding-top: 75px !important;
-}
-
-/* === MODIFICATION 2 & 9: CLAY TIMELINE & HEAVY BUNKER VIGNETTE MASK === */
-body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-mono);
@@ -108,7 +105,6 @@ body {
     padding: 30px;
     overflow-x: hidden;
     position: relative;
-    /* Implements a deep, claustrophobic vignette over the decaying clay gradient background */
     background-image: 
         radial-gradient(circle at center, rgba(30, 41, 59, 0.05) 0%, rgba(0,0,0,0.98) 85%),
         linear-gradient(180deg, #0c0d0e 40%, #1e2022 75%, #2a2c2e 100%);
@@ -122,11 +118,12 @@ body::before {
     position: fixed;
     top: 0; left: 0; bottom: 0; right: 0;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
     z-index: 9999;
     background-size: 100% 5px, 4px 100%;
     pointer-events: none;
 }
+
 /* === BRUTALIST SYSTEM FOOTER === */
 .system-footer {
     margin-top: 80px;
@@ -135,7 +132,6 @@ body::before {
     border-top: 2px solid var(--dim-text);
 }
 
-/* Finch's copper grounding strap overlay at the footer break boundary */
 .system-footer::before {
     content: "";
     position: absolute;
@@ -148,7 +144,7 @@ body::before {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 15fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 30px;
 }
@@ -193,7 +189,6 @@ body::before {
     font-weight: bold;
 }
 
-/* Responsive collapse for small viewports */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;
@@ -201,7 +196,7 @@ body::before {
     }
 }
 
-/* === MODIFICATION 7: DYING VACUUM TUBE CHASSIS RUMBLE === */
+/* === CONTAINER & CHASSIS INTERFACES === */
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -210,11 +205,9 @@ body::before {
     border: 2px solid var(--dim-text);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
     position: relative;
-    /* Adds a continuous low-level structural jitter from the generator hum */
     animation: chassis-vibration 8s infinite linear;
 }
 
-/* Power Terminal Flicker */
 header {
     border-bottom: 4px double var(--text-color);
     padding-bottom: 25px;
@@ -222,7 +215,6 @@ header {
     animation: terminal-flicker 0.25s infinite;
 }
 
-/* === MODIFICATION 1: BLEEDING PHOSPHOR DROP-SHADOWS === */
 h1 {
     font-size: 2.3rem;
     margin: 0;
@@ -234,7 +226,6 @@ h1 {
         0 9px 12px rgba(226, 232, 240, 0.1);
 }
 
-/* === MODIFICATION 5: FINCH'S GROUNDING STRAP SEPARATORS === */
 h2 {
     font-size: 1.3rem;
     letter-spacing: 3px;
@@ -244,6 +235,7 @@ h2 {
     position: relative;
     border: none;
 }
+
 h2::after {
     content: "";
     position: absolute;
@@ -254,7 +246,6 @@ h2::after {
     background: var(--copper-strap);
 }
 
-/* Double-Border Matrix */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -278,7 +269,6 @@ td {
     vertical-align: top;
 }
 
-/* Character Context Matrices */
 tr[data-char="vance"] {
     color: #cbd5e1;
     text-shadow: 3px 2px 2px rgba(148, 163, 184, 0.3);
@@ -290,15 +280,14 @@ tr[data-char="caso"] {
     text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
-/* === MODIFICATION 8: FINCH GHOST IMAGE TEXT TRAILS === */
 tr[data-char="finch"] {
     color: #fda4af;
     position: relative;
     animation: finch-decay 1.5s infinite linear;
     transition: all 0.3s ease;
 }
+
 tr[data-char="finch"]:hover {
-    /* Generates chromatic, delayed ghost shadows on hover */
     text-shadow: -3px 0 0 rgba(244, 63, 94, 0.6), 3px 0 0 rgba(56, 189, 248, 0.6);
     background: rgba(244, 63, 94, 0.05);
 }
@@ -307,7 +296,6 @@ tr[data-char="finch"]:hover {
     margin-top: 20px;
 }
 
-/* === MODIFICATION 4: VANCE'S SPLIT-VISION STRUCTURAL SHIFT === */
 .log {
     background: rgba(5, 5, 6, 0.9);
     margin-bottom: 40px;
@@ -318,14 +306,11 @@ tr[data-char="finch"]:hover {
     border-bottom: 1px solid var(--dim-text);
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
     transform: perspective(500px) rotateY(0.5deg);
-    
-    /* === MODIFICATION 10: CARBON AEROSOL EXECUTION FADE === */
     transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1), transform 0.5s ease, filter 0.5s ease;
     opacity: 1;
     filter: blur(0px) contrast(100%);
 }
 
-/* === MODIFICATION 3: CASO'S CONSENSUS ANCHOR RADIUS === */
 .log:hover {
     transform: scale(1.01) perspective(0px) rotateY(0deg);
     border: 1px solid var(--caso-glow);
@@ -334,7 +319,6 @@ tr[data-char="finch"]:hover {
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
 }
 
-/* Replaces default hidden behavior with pixelating aerosol decay */
 .log.hidden {
     display: block !important;
     visibility: hidden;
@@ -359,23 +343,7 @@ tr[data-char="finch"]:hover {
     letter-spacing: 1px;
 }
 
-/* Interactive Console Interface */
-footer {
-    margin-top: 60px;
-    padding-top: 25px;
-    padding-bottom: 40px;
-    position: relative;
-}
-footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--copper-strap);
-}
-
+/* Terminal Console Engine */
 .terminal-interface {
     background-color: #050505;
     border: 2px solid var(--dim-text);
@@ -415,14 +383,34 @@ footer::before {
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
-/* === MODIFICATION 6: BURNT COPPER OVER-VOLTAGE FLASH === */
 .screen-tear {
     animation: tear-effect 0.3s infinite linear, overvoltage-flash 0.4s ease-out;
 }
 
-/* === INTERACTIVE ANIMATION ARCHITECTURE === */
+/* === MUTATION & DYNAMIC INTEGRITY ENGINE === */
+#manifest-sector tbody tr {
+    transition: all 0.3s ease;
+    position: relative;
+    --loss-ratio: 0;
+    --blur-strength: 0px;
+    --skew-angle: 0deg;
+}
 
-/* Micro-jitter mechanical vibrations */
+#manifest-sector tbody tr[data-char] {
+    transform: skewX(var(--skew-angle));
+    filter: blur(var(--blur-strength));
+    text-shadow: 
+        calc(var(--loss-ratio) * -0.1px) 0 0 rgba(244, 63, 94, 0.4),
+        calc(var(--loss-ratio) * 0.1px) 0 0 rgba(56, 189, 248, 0.4);
+}
+
+/* CLEAN REPLACEMENT FOR THE TERNARY LOGIC ERROR: 
+   If JS handles corruption status, have it toggle a `.corrupted` class on the <tr> element */
+#manifest-sector tbody tr.corrupted {
+    animation: finch-decay 2s infinite linear;
+}
+
+/* === INTERACTIVE ANIMATION ARCHITECTURE === */
 @keyframes chassis-vibration {
     0%, 100% { transform: translate(0, 0); }
     1% { transform: translate(0.2px, 0.1px); }
@@ -432,7 +420,6 @@ footer::before {
     5% { transform: translate(0, 0); }
 }
 
-/* Intense color dump on structural diagnostic error */
 @keyframes overvoltage-flash {
     0% { background: #0c0d0e; }
     15% { background: #ea580c; filter: invert(0.9); }
@@ -445,33 +432,7 @@ footer::before {
     50% { opacity: 1; }
     100% { opacity: 0.97; }
 }
-/* Dynamic Entity Mutation Engine */
-#manifest-sector tbody tr {
-    transition: all 0.3s ease;
-    position: relative;
-    
-    /* Fallbacks if properties aren't calculated yet */
-    --loss-ratio: 0;
-    --blur-strength: 0px;
-    --skew-angle: 0deg;
-}
 
-/* Apply data-driven corruption directly based on the entity's database integrity */
-#manifest-sector tbody tr[data-char] {
-    /* As integrity falls, text skews out of true vertical alignment and slightly blurs */
-    transform: skewX(var(--skew-angle));
-    filter: blur(var(--blur-strength));
-    
-    /* Layered ghost shadows intensify based on data loss ratio */
-    text-shadow: 
-        calc(var(--loss-ratio) * -0.1px) 0 0 rgba(244, 63, 94, 0.4),
-        calc(var(--loss-ratio) * 0.1px) 0 0 rgba(56, 189, 248, 0.4);
-}
-
-/* If integrity drops below 40%, trigger an erratic active code decay loop */
-#manifest-sector tbody tr {
-    animation: var(--loss-ratio) > 60 ? finch-decay 2s infinite linear : none;
-}
 @keyframes finch-decay {
     0% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
     94% { transform: skewX(0deg); filter: blur(0px); }
