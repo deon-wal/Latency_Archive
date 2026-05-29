@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LATENCY ARCHIVE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- FIXED NAVBAR: Anchored at the top, out of the main container -->
+<nav class="system-nav">
+    <div class="nav-left">
+        <span class="nav-status-indicator"></span>
+        <span class="nav-title">SYS.LOC // SECTOR-04</span>
+    </div>
+    <div class="nav-links">
+        <a href="#manifest-sector" class="nav-item">MANIFEST</a>
+        <a href="#logs-sector" class="nav-item">LOGS</a>
+        <a href="#terminal-interface" class="nav-item">CONSOLE</a>
+    </div>
+    <div class="nav-right">
+        <span id="system-clock" class="nav-clock">00:00:00 UTC</span>
+        <button onclick="purgeSystemMemory()" class="nav-purge-btn">PURGE MEM</button>
+    </div>
+</nav>
+
+<div class="container" id="terminal-screen">
+
+    <header>
+        <h1>[ THE LATENCY ARCHIVE ]</h1>
+        <p>System Consensus: VERIFIED // Local Anchor Status: NOMINAL</p>
+    </header>
+
+    <main>
+        <section id="manifest-sector">
+            <h2>👥 Character Manifest</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Role / Status</th>
+                        <th>Visual Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamically populated by database system -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="logs-sector">
+            <h2>📑 System Incident Logs</h2>
+            <div class="log-container" id="log-box">
+
+                <div class="log" data-tags="vance">
+                    <div class="log-meta">Log I: The Baseline (01:00) // Tags: [vance]</div>
+                    <p>The basement level of the facility always smells like damp concrete and dying vacuum tubes. My job as a Host Verification Agent is simple on paper: sit at the terminal, monitor the incoming data packets from the core, and make sure the local reality matches the server ledger.</p>
+                    <p>But tonight, the green phosphor text on my screen keeps pulsing out of sync with the generator downstairs. If I stare at the blinking cursor too long, it begins to look like a tiny, square hole cut straight through the glass, revealing a dead, hollow blackness behind the monitor housing. My mind is already running hot, processing the background static of a triple shift. When I raise my hand to adjust the brightness knob, my shadow on the brutalist wall behind me waits a fraction of a second too long to mimic the movement. I pretend I didn't see it.</p>
+                </div>
+
+                <div class="log" data-tags="vance">
+                    <div class="log-meta">Log II: The Aerosol Event (02:15) // Tags: [vance]</div>
+                    <p>The junior technician at terminal seven didn't even have time to scream when his local console hit a hard logic exception.</p>
+                    <p>I looked up from my desk just as his terminal emitted a sharp, high-frequency whine that made my teeth ache. His body didn't collapse; it desynchronized. Over the span of three keystrokes, his physical form pixelated into a cloud of fine, matte-black carbon aerosol. The air pressure in the room spiked violently, pulling the dark particulate directly into the overhead ventilation intake vents with a wet, rushing sound. By the time I walked over to his station, his chair was completely empty. The mechanical keyboard was still warm, coated in a micro-layer of dark soot. On his monitor, the system ledger didn't register a casualty. It just printed a single line of automated text: <code>Syntax error at line 404. Execution aborted.</code></p>
+                </div>
+
+                <div class="log" data-tags="vance caso finch">
+                    <div class="log-meta">Log III: Sector 04 Layer Collapse (03:14) // Tags: [vance, caso, finch]</div>
+                    <p>The green phosphor on my terminal screen wasn't printing line by line anymore; it was dripping down the glass face of the CRT, pooling into the plastic housing like cold candle wax. My left eye tracked the melting error codes while my right eye registered the server stack opposite me dissolving into wet gray clay. My mind was split down the center, running two parallel execution streams just to keep my boots on the floor.</p>
+                    <p>"Vance. You're drifting again. Your shadow is two beats behind your spine."</p>
+                    <p>I looked up to see Coordinator Caso standing at the threshold of Sector 04. Against the damp, crumbling concrete of the bunker, she was a cinematic anomaly. Her rendering was absolute, high-definition perfection. The system wasn't letting a single pixel of her form decay. As she walked straight into the clay zone, a five-foot radius around her boots snapped instantly back into solid, rusted steel.</p>
+                    <p>"I can't clear the buffer, Caso," I said, my voice sounding compressed and metallic. "The logic loop is feeding on the local architecture."</p>
+                    <p>"Then cut the line manually," she said, her voice perfectly crisp. She reached out and gripped my shoulder. The second her fingers closed around my jacket, my split vision slammed shut, merging the overlapping rooms back into one.</p>
+                    <p>From the dark space behind the mainframe rack, a high, frantic giggle cut through the hum of the cooling fans. Finch crawled out from under the raised floor plates, holding a rusted grounding strap in her teeth. Her face was a mess of nervous adrenaline—wide-eyed, sleepless, and entirely unindexed. When she tilted her head, her expression lagged behind by a fraction of a second, leaving a sickening trail of ghost images in the air.</p>
+                    <p>"Don't touch the mainframe, Caso!" Finch whispered, her teeth clicking against the metal strap. "The code is singing tonight. If you patch it, the music stops."</p>
+                    <p>Finch lunged forward, her erratic, twitching frame moving into Caso's high-definition radius. The reaction was instantaneous. A violent screen-tear effect ripped across the air between them. The concrete walls flickered between smooth stone and raw static. The system was trying to force Caso's stability onto Finch's active corruption, and the air smelled like burnt hair and shorted copper.</p>
+                    <p>"Get her back, Vance!" Caso snapped, her clean outline finally stuttering into mechanical distortion. "She’s dragging the whole sector down with her!"</p>
+                    <p>Finch wasn't fighting; she was laughing, leaning right into the tearing static as the floor plates beneath us began to liquefy again. Suddenly, a system alert flashed across my failing monitor, warning of a critical local consensus failure.</p>
+                    <p>I blinked, and the tearing stopped. Caso was gone—her high-priority process instantly re-routed by the core to a safer sector. The floor was pure mud now, rising to my ankles. Finch sat in the center of the mess, completely untouched by the clay, happily whispering lines of dead assembly language into the dark. I was completely alone on the midnight shift, my vision slowly beginning to split again.</p>
+                </div>
+
+                <div class="log" data-tags="vance caso finch">
+                    <div class="log-meta">Log IV: Cross-Execution Amplitude (18:45) // Tags: [vance, caso, finch]</div>
+                    <p>By the time the next cycle hit, my optical nerves were completely split between processing streams. My left eye registered a clean steel corridor, while my right eye tracked the shifting clay timeline creeping back from the edges of the room. The perimeter fans were spinning at an impossible speed, hum-buzzing a frequency that VIBRATED right through my teeth.</p>
+                    <p>Then Caso stepped back into the frame.</p>
+                    <p>She had been re-routed, but she cut through the cross-talk to find my terminal station again. While the floor beneath her boots blurred between corrugated iron and wet earth, her outline remained razor-sharp, rendered in high-priority absolute focus. She didn't panic. She walked right up to my console, reached out, and clamped her hand hard around my trembling left wrist.</p>
+                    <p>The moment her skin touched mine, the system forced a hard local consensus. The clay timeline snapped shut like a book. The floor hardened into pure steel. My lungs filled with a single, uniform breath of clean air.</p>
+                    <p>"Hold it right there, Vance," she said, her voice clean and completely devoid of terminal compression. "Don't look at the perimeter fans. Look at me."</p>
+                    <p>I forced my split focus onto her eyes, trying to anchor my consciousness to her high-definition rendering. But the terminal interface behind her was already updating. A cold spike of static hit the back of my neck.</p>
+                    <p>I blinked, and she was gone. The metal chair beside me was freezing cold, completely empty. On the monitor, the system ledger updated instantly, displaying a single line of automated text indicating User Session A. Caso had been routed to Sector 09, Cluster B.</p>
+                    <p>Behind me, the low, wet scratching sound of Finch dragging a rusted grounding strap across the concrete floor began all over again.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- TERMINAL ENTRY PANEL -->
+    <div class="terminal-interface" id="terminal-interface">
+        <div class="terminal-output" id="output-screen">System Initialized. Type 'help' for terminal operational directives.</div>
+        <div class="terminal-input-row">
+            <span class="terminal-prompt">SYSTEM@CORE:&gt;</span>
+            <input type="text" id="terminal-command" class="terminal-field" autofocus autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <!-- REPAIRED FOOTER LOCATION: Safely inside the layout architecture block -->
+    <footer class="system-footer">
+        <div class="footer-grid">
+            <div class="footer-panel">
+                <span class="panel-label">LOCATION REFS</span>
+                <div class="panel-data">LOC // SECTOR-04</div>
+                <div class="panel-data">SUBSTRUCTURE // LEVEL-B</div>
+            </div>
+            <div class="footer-panel">
+                <span class="panel-label">METRIC QUANTUM</span>
+                <div class="panel-data">DRIFT: <span id="footer-drift">4.14ms</span></div>
+                <div class="panel-data">RENDER INT: <span id="footer-integrity">88.2%</span></div>
+            </div>
+            <div class="footer-panel">
+                <span class="panel-label">CORE COMPILE</span>
+                <div class="panel-data">ENGINE // SUBSTRATE.v2</div>
+                <div class="panel-data">TARGET // LATENCY_LOG</div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">RESTRICTED DATA SYSTEM // AUTHORIZED PERSONNEL ONLY</div>
+            <div class="system-sig">0x00FF4A_ALPHA</div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- UNIFIED TERMINAL ENGINE & PERSISTENCE SCRIPT -->
+<script>
+    const terminalInput = document.getElementById('terminal-command');
+    const terminalOutput = document.getElementById('output-screen');
+    const logs = document.querySelectorAll('.log');
+    const screen = document.getElementById('terminal-screen');
+
+    // === PERSISTENT LEDGER DATABASE ===
+    const defaultManifest = {
+        vance: {
+            name: "Vance",
+            role: "Host Verification Agent / Low-Priority Glitch",
+            profile: "Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.",
+            integrity: "74.2%",
+            offset: "0x00FF4A",
+            notes: "Exhibiting structural delay. Memory streams run parallel on triple shifts."
+        },
+        caso: {
+            name: "Coordinator Caso",
+            role: "High-Priority Render / High-Definition Anchor",
+            profile: "Ana de Armas type; cinematic perfection, stabilizes local reality.",
+            integrity: "99.9%",
+            offset: "0xFFFFFF",
+            notes: "Absolute render lock. Core routing active. Automatically stabilizes local clay zones."
+        },
+        finch: {
+            name: "Finch",
+            role: "Corrupted Element / Active Corruption",
+            profile: "Mia Goth type; erratic, ghost images, numb to reality collapse.",
+            integrity: "12.4%",
+            offset: "0x000000",
+            notes: "Unindexed loop threat. Carrying rusted grounding strap. Singing dead assembly code."
+        }
+    };
+
+    let ledger = JSON.parse(localStorage.getItem('latency_ledger')) || defaultManifest;
+
+    function saveLedger() {
+        localStorage.setItem('latency_ledger', JSON.stringify(ledger));
+    }
+
+    function syncManifestUI() {
+        const tbody = document.querySelector('#manifest-sector table tbody');
+        if (!tbody) return;
+        
+        tbody.innerHTML = '';
+        for (const key in ledger) {
+            const entity = ledger[key];
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-char', key);
+            tr.innerHTML = `
+                <td><strong>${entity.name}</strong></td>
+                <td>${entity.role} [INT: ${entity.integrity}]</td>
+                <td>${entity.profile}</td>
+            `;
+            tbody.appendChild(tr);
+        }
+        if (typeof applyDynamicCorruption === "function") {
+            applyDynamicCorruption();
+        }
+    }
+
+    function applyDynamicCorruption() {
+        for (const key in ledger) {
+            const entity = ledger[key];
+            const row = document.querySelector(`tr[data-char="${key}"]`);
+            if (row) {
+                const integrityNum = parseFloat(entity.integrity) || 100;
+                const loss = 100 - integrityNum;
+                row.style.setProperty('--loss-ratio', `${loss}`);
+                row.style.setProperty('--blur-strength', `${(loss * 0.05).toFixed(2)}px`);
+                row.style.setProperty('--skew-angle', `${(loss * 0.3).toFixed(1)}deg`);
+            }
+        }
+    }
+
+    // Initialize UI on first execution load
+    syncManifestUI();
+
+    terminalInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const rawInput = this.value.trim();
+            this.value = '';
+            if (rawInput === '') return;
+            processCommand(rawInput);
+        }
+    });
+
+    function printOutput(text) {
+        terminalOutput.innerText += '\n' + text;
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function processCommand(input) {
+        const match = input.match(/([^\s"']+|"[^"]*"|'[^']*')/g);
+        if (!match) return;
+        
+        const parts = match.map(p => p.replace(/^["']|["']$/g, ''));
+        const cmd = parts[0].toLowerCase();
+        const target = parts[1] ? parts[1].toLowerCase() : null;
+
+        printOutput(`> ${input}`);
+
+        switch(cmd) {
+            case 'help':
+                printOutput(
+                    "Available System Directives:\n" +
+                    "  status                       - Evaluates regional reality consistency.\n" +
+                    "  manifest                     - Compiles visual database table views.\n" +
+                    "  logs [--tag]                  - Queries historical event logs. (Flags: --vance, --caso, --finch)\n" +
+                    "  query [id]                   - Pulls low-level registry blocks for an entry.\n" +
+                    "  update [id] \"notes\"          - Appends diagnostic operational logs to asset.\n" +
+                    "  register [id] [name] \"prof\"  - Initialized a brand new tracking matrix.\n" +
+                    "  backup                       - Extracts JSON schema payload backup.\n" +
+                    "  export ledger                - Packs dynamic manifest into an offline Markdown file.\n" +
+                    "  diagnose                     - Runs structural variance sweep.\n" +
+                    "  clear                        - Purges console stream buffer."
+                );
+                break;
+
+            case 'clear':
+                terminalOutput.innerText = "Buffer purged. System ready.";
+                break;
+
+            case 'status':
+                printOutput("ANALYSIS COMPLETE:\nLocal Drift: 4.14ms\nRender Integrity: 88.2%\nThreat Vector: Finch [UNINDEXED]");
+                break;
+
+            case 'manifest':
+                document.getElementById('manifest-sector').scrollIntoView({ behavior: 'smooth' });
+                printOutput("Display context localized to Manifest Matrix.");
+                break;
+
+            case 'logs':
+                if (!target) {
+                    logs.forEach(log => log.classList.remove('hidden'));
+                    printOutput("All incident logs loaded into memory buffer.");
+                } else if (target === '--vance' || target === '--caso' || target === '--finch') {
+                    const filterTag = target.replace('--', '');
+                    let matches = 0;
+                    logs.forEach(log => {
+                        const tags = log.getAttribute('data-tags').split(' ');
+                        if (tags.includes(filterTag)) {
+                            log.classList.remove('hidden');
+                            matches++;
+                        } else {
+                            log.classList.add('hidden');
+                        }
+                    });
+                    document.getElementById('logs-sector').scrollIntoView({ behavior: 'smooth' });
+                    printOutput(`Isolated execution stream. Logs containing [${filterTag}]: ${matches} found.`);
+                } else {
+                    printOutput(`Error: Invalid stream delimiter. Use --vance, --caso, or --finch.`);
+                }
+                break;
+
+            case 'query':
+                if (target && ledger[target]) {
+                    const item = ledger[target];
+                    printOutput(
+                        `[REGISTRY BLOCK: ${target.toUpperCase()}]\n` +
+                        `--------------------------------------\n` +
+                        `DESIGNATION: ${item.name}\n` +
+                        `ROLE INDEX : ${item.role}\n` +
+                        `INTEGRITY  : ${item.integrity}\n` +
+                        `RAM OFFSET : ${item.offset}\n` +
+                        `DIAGNOSTIC : ${item.notes}`
+                    );
+                } else {
+                    printOutput(`Query Exception: Missing or unindexed target [${parts[1] || ''}].`);
+                }
+                break;
+
+            case 'update':
+                if (target && ledger[target] && parts[2]) {
+                    const updatedNotes = parts.slice(2).join(' ');
+                    ledger[target].notes = updatedNotes;
+                    
+                    let numericalInt = parseFloat(ledger[target].integrity);
+                    if (!isNaN(numericalInt)) {
+                        ledger[target].integrity = Math.max(0, (numericalInt - 2.4)).toFixed(1) + "%";
+                    }
+
+                    saveLedger();
+                    syncManifestUI();
+                    printOutput(`LEDGER COMMIT: Record [${target}] updated successfully. Stability recalculated.`);
+                } else {
+                    printOutput("Syntax Exception: Use -> update [id] \"Your tracking log updates here\"");
+                }
+                break;
+
+            case 'register':
+                if (target && parts[2] && parts[3]) {
+                    if (ledger[target]) {
+                        printOutput(`Allocation Aborted: Identifier [${target}] already owns database reference.`);
+                        break;
+                    }
+                    
+                    const entityName = parts[2];
+                    const entityProfile = parts.slice(3).join(' ');
+                    
+                    ledger[target] = {
+                        name: entityName,
+                        role: "Unclassified System Asset / Ingestion Phase",
+                        profile: entityProfile,
+                        integrity: "100.0%",
+                        offset: "0x" + Math.floor(Math.random()*16777215).toString(16).toUpperCase(),
+                        notes: "Asset initialized remotely via system terminal execution."
+                    };
+
+                    saveLedger();
+                    syncManifestUI();
+                    printOutput(`REGISTRATION LOGGED: Target [${entityName}] injected into secure storage database.`);
+                } else {
+                    printOutput("Syntax Exception: Use -> register [id] [Name] \"Visual description details\"");
+                }
+                break;
+
+            case 'backup':
+                const blob = new Blob([JSON.stringify(ledger, null, 4)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `sector04_ledger_backup.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                printOutput("SUCCESS: Data structure database exported to JSON file format.");
+                break;
+
+            case 'export':
+                if (target === 'ledger') {
+                    let markdownContent = `# SECURE TERMINAL DATA EXPORT // SYSTEM LEDGER\n\n`;
+                    for (const key in ledger) {
+                        const entity = ledger[key];
+                        markdownContent += `### [[${entity.name}]]\n`;
+                        markdownContent += `- **Role/Designation:** ${entity.role}\n`;
+                        markdownContent += `- **Local Data Integrity:** ${entity.integrity}\n`;
+                        markdownContent += `- **Hex RAM Offset:** \`${entity.offset}\`\n`;
+                        markdownContent += `- **Operational Notes:** ${entity.notes}\n\n---\n\n`;
+                    }
+                    const mdBlob = new Blob([markdownContent], { type: 'text/markdown' });
+                    const mdUrl = URL.createObjectURL(mdBlob);
+                    const mdLink = document.createElement('a');
+                    mdLink.href = mdUrl;
+                    mdLink.download = `sector04_ledger_export.md`;
+                    mdLink.click();
+                    URL.revokeObjectURL(mdUrl);
+                    printOutput(`EXPORT COMPLETE: Markdown file configured for Obsidian syncing.`);
+                } else {
+                    printOutput("Export targets include: 'ledger'");
+                }
+                break;
+
+            case 'diagnose':
+                printOutput("CRITICAL WARN: Executing structural diagnostic. Reality variance detected.");
+                screen.classList.add('screen-tear');
+                setTimeout(() => {
+                    screen.classList.remove('screen-tear');
+                    printOutput("Diagnostic complete. Consensus stabilized manually by Agent Vance.");
+                }, 1500);
+                break;
+
+            default:
+                printOutput(`Command exception: '${cmd}' unrecognized. Execution aborted.`);
+        }
+    }
+
+    // === NAVBAR SYSTEM AUTOMATION FUNCTIONS ===
+    function updateSystemClock() {
+        const clockElement = document.getElementById('system-clock');
+        if (clockElement) {
+            const now = new Date();
+            clockElement.innerText = now.toLocaleTimeString('en-US', { hour12: false }) + " SYSTEM_CLK";
+        }
+    }
+    setInterval(updateSystemClock, 1000);
+    updateSystemClock();
+
+    function purgeSystemMemory() {
+        if (confirm("CRITICAL DIRECTIVE: Clear local memory banks and reset timeline variables back to default values?")) {
+            localStorage.removeItem('latency_ledger');
+            printOutput("SYSTEM WARNING: Core memory banks purged. Re-initializing terminal defaults...");
+            setTimeout(() => { window.location.reload(); }, 1000);
+        }
+    }
+</script>
+</body>
+</html>
