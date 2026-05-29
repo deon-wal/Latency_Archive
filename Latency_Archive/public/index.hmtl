@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LATENCY ARCHIVE</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #00ff66; 
+            --dim-text: #008833;
+            --alert-color: #ff3333;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        header {
+            border-bottom: 2px double var(--text-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--text-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid var(--dim-text);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: rgba(0, 255, 102, 0.05);
+            text-transform: uppercase;
+        }
+
+        .log-container {
+            margin-top: 20px;
+        }
+
+        .log {
+            margin-bottom: 35px;
+            padding-left: 15px;
+            border-left: 3px solid var(--text-color);
+            transition: opacity 0.3s ease;
+        }
+
+        .log.hidden {
+            display: none;
+        }
+
+        .log-meta {
+            color: var(--dim-text);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Terminal Footer Styles */
+        footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--dim-text);
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .terminal-interface {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--dim-text);
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .terminal-output {
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            color: var(--dim-text);
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-prompt {
+            margin-right: 10px;
+            user-select: none;
+        }
+
+        .terminal-field {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Screen Tear Glitch Effect Triggered via JS */
+        .screen-tear {
+            animation: tear 0.4s linear infinite;
+        }
+
+        @keyframes tear {
+            0% { transform: skewX(0deg); filter: hue-rotate(0deg); }
+            10% { transform: skewX(-5deg) translateX(-5px); filter: invert(1); }
+            20% { transform: skewX(8deg) translateY(2px); }
+            30% { transform: skewX(0deg); }
+            100% { transform: skewX(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="terminal-screen">
+
+    <header>
+        <h1>[ THE LATENCY ARCHIVE ]</h1>
+        <p>System Consensus: VERIFIED // Local Anchor Status: NOMINAL</p>
+    </header>
+
+    <main>
+        <!-- CHARACTER MANIFEST -->
+        <section id="manifest-sector">
+            <h2>👥 Character Manifest</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Role / Status</th>
+                        <th>Visual Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vance</strong></td>
+                        <td>Host Verification Agent / Low-Priority Glitch</td>
+                        <td>Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coordinator Caso</strong></td>
+                        <td>High-Priority Render / High-Definition Anchor</td>
+                        <td>Ana de Armas type; cinematic perfection, stabilizes local reality.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Finch</strong></td>
+                        <td>Corrupted Element / Active Corruption</td>
+                        <td>Mia Goth type; erratic, ghost images, numb to reality collapse.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SYSTEM INCIDENT LOGS -->
+        <section id="logs-sector">
+            <h2>📑 System Incident Logs</h2>
+            <div class="log-container" id="log-box">
+
+                <div class="log" data-tags="vance">
+                    <div class="log-meta">Log I: The Baseline (01:00) // Tags: [vance]</div>
+                    <p>The basement level of the facility always smells like damp concrete and dying vacuum tubes. My job as a Host Verification Agent is simple on paper: sit at the terminal, monitor the incoming data packets from the core, and make sure the local reality matches the server ledger.</p>
+                    <p>But tonight, the green phosphor text on my screen keeps pulsing out of sync with the generator downstairs. If I stare at the blinking cursor too long, it begins to look like a tiny, square hole cut straight through the glass, revealing a dead, hollow blackness behind the monitor housing. My mind is already running hot, processing the background static of a triple shift. When I raise my hand to adjust the brightness knob, my shadow on the brutalist wall behind me waits a fraction of a second too long to mimic the movement. I pretend I didn't see it.</p>
+                </div>
+
+                <div class="log" data-tags="vance">
+                    <div class="log-meta">Log II: The Aerosol Event (02:15) // Tags: [vance]</div>
+                    <p>The junior technician at terminal seven didn't even have time to scream when his local console hit a hard logic exception.</p>
+                    <p>I looked up from my desk just as his terminal emitted a sharp, high-frequency whine that made my teeth ache. His body didn't collapse; it desynchronized. Over the span of three keystrokes, his physical form pixelated into a cloud of fine, matte-black carbon aerosol. The air pressure in the room spiked violently, pulling the dark particulate directly into the overhead ventilation intake vents with a wet, rushing sound. By the time I walked over to his station, his chair was completely empty. The mechanical keyboard was still warm, coated in a micro-layer of dark soot. On his monitor, the system ledger didn't register a casualty. It just printed a single line of automated text: <code>Syntax error at line 404. Execution aborted.</code></p>
+                </div>
+
+                <div class="log" data-tags="vance caso finch">
+                    <div class="log-meta">Log III: Sector 04 Layer Collapse (03:14) // Tags: [vance, caso, finch]</div>
+                    <p>The green phosphor on my terminal screen wasn't printing line by line anymore; it was dripping down the glass face of the CRT, pooling into the plastic housing like cold candle wax. My left eye tracked the melting error codes while my right eye registered the server stack opposite me dissolving into wet gray clay. My mind was split down the center, running two parallel execution streams just to keep my boots on the floor.</p>
+                    <p>"Vance. You're drifting again. Your shadow is two beats behind your spine."</p>
+                    <p>I looked up to see Coordinator Caso standing at the threshold of Sector 04. Against the damp, crumbling concrete of the bunker, she was a cinematic anomaly. Her rendering was absolute, high-definition perfection. The system wasn't letting a single pixel of her form decay. As she walked straight into the clay zone, a five-foot radius around her boots snapped instantly back into solid, rusted steel.</p>
+                    <p>"I can't clear the buffer, Caso," I said, my voice sounding compressed and metallic. "The logic loop is feeding on the local architecture."</p>
+                    <p>"Then cut the line manually," she said, her voice perfectly crisp. She reached out and gripped my shoulder. The second her fingers closed around my jacket, my split vision slammed shut, merging the overlapping rooms back into one.</p>
+                    <p>From the dark space behind the mainframe rack, a high, frantic giggle cut through the hum of the cooling fans. Finch crawled out from under the raised floor plates, holding a rusted grounding strap in her teeth. Her face was a mess of nervous adrenaline—wide-eyed, sleepless, and entirely unindexed. When she tilted her head, her expression lagged behind by a fraction of a second, leaving a sickening trail of ghost images in the air.</p>
+                    <p>"Don't touch the mainframe, Caso!" Finch whispered, her teeth clicking against the metal strap. "The code is singing tonight. If you patch it, the music stops."</p>
+                    <p>Finch lunged forward, her erratic, twitching frame moving into Caso's high-definition radius. The reaction was instantaneous. A violent screen-tear effect ripped across the air between them. The concrete walls flickered between smooth stone and raw static. The system was trying to force Caso's stability onto Finch's active corruption, and the air smelled like burnt hair and shorted copper.</p>
+                    <p>"Get her back, Vance!" Caso snapped, her clean outline finally stuttering into mechanical distortion. "She’s dragging the whole sector down with her!"</p>
+                    <p>Finch wasn't fighting; she was laughing, leaning right into the tearing static as the floor plates beneath us began to liquefy again. Suddenly, a system alert flashed across my failing monitor, warning of a critical local consensus failure.</p>
+                    <p>I blinked, and the tearing stopped. Caso was gone—her high-priority process instantly re-routed by the core to a safer sector. The floor was pure mud now, rising to my ankles. Finch sat in the center of the mess, completely untouched by the clay, happily whispering lines of dead assembly language into the dark. I was completely alone on the midnight shift, my vision slowly beginning to split again.</p>
+                </div>
+
+                <div class="log" data-tags="vance caso finch">
+                    <div class="log-meta">Log IV: Cross-Execution Amplitude (18:45) // Tags: [vance, caso, finch]</div>
+                    <p>By the time the next cycle hit, my optical nerves were completely split between processing streams. My left eye registered a clean steel corridor, while my right eye tracked the shifting clay timeline creeping back from the edges of the room. The perimeter fans were spinning at an impossible speed, hum-buzzing a frequency that VIBRATED right through my teeth.</p>
+                    <p>Then Caso stepped back into the frame.</p>
+                    <p>She had been re-routed, but she cut through the cross-talk to find my terminal station again. While the floor beneath her boots blurred between corrugated iron and wet earth, her outline remained razor-sharp, rendered in high-priority absolute focus. She didn't panic. She walked right up to my console, reached out, and clamped her hand hard around my trembling left wrist.</p>
+                    <p>The moment her skin touched mine, the system forced a hard local consensus. The clay timeline snapped shut like a book. The floor hardened into pure steel. My lungs filled with a single, uniform breath of clean air.</p>
+                    <p>"Hold it right there, Vance," she said, her voice clean and completely devoid of terminal compression. "Don't look at the perimeter fans. Look at me."</p>
+                    <p>I forced my split focus onto her eyes, trying to anchor my consciousness to her high-definition rendering. But the terminal interface behind her was already updating. A cold spike of static hit the back of my neck.</p>
+                    <p>I blinked, and she was gone. The metal chair beside me was freezing cold, completely empty. On the monitor, the system ledger updated instantly, displaying a single line of automated text indicating User Session A. Caso had been routed to Sector 09, Cluster B.</p>
+                    <p>Behind me, the low, wet scratching sound of Finch dragging a rusted grounding strap across the concrete floor began all over again.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- CORE INTERACTIVE ENGINE -->
+    <footer>
+        <div class="terminal-interface">
+            <div class="terminal-output" id="output-screen">System Initialized. Type 'help' for terminal operational directives.</div>
+            <div class="terminal-input-row">
+                <span class="terminal-prompt">SYSTEM@CORE:&gt;</span>
+                <input type="text" id="terminal-command" class="terminal-field" autofocus autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const terminalInput = document.getElementById('terminal-command');
+    const terminalOutput = document.getElementById('output-screen');
+    const logs = document.querySelectorAll('.log');
+    const screen = document.getElementById('terminal-screen');
+
+    const history = [];
+
+    terminalInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const rawInput = this.value.trim();
+            this.value = '';
+            if (rawInput === '') return;
+
+            processCommand(rawInput);
+        }
+    });
+
+    function printOutput(text) {
+        terminalOutput.innerText += '\n' + text;
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function processCommand(input) {
+        const parts = input.toLowerCase().split(' ');
+        const cmd = parts[0];
+        const arg = parts[1];
+
+        printOutput(`> ${input}`);
+
+        switch(cmd) {
+            case 'help':
+                printOutput(
+                    "Available System Directives:\n" +
+                    "  status                - Evaluates regional reality consistency.\n" +
+                    "  manifest              - Pulls up target data records.\n" +
+                    "  logs [--tag]          - Queries system events. (Flags: --vance, --caso, --finch)\n" +
+                    "  diagnose              - Runs a low-level diagnostic sweep.\n" +
+                    "  clear                 - Clears the terminal feedback buffer."
+                );
+                break;
+
+            case 'clear':
+                terminalOutput.innerText = "Buffer purged. System ready.";
+                break;
+
+            case 'status':
+                printOutput("ANALYSIS COMPLETE:\nLocal Drift: 4.14ms\nRender Integrity: 88.2%\nThreat Vector: Finch [UNINDEXED]");
+                break;
+
+            case 'manifest':
+                document.getElementById('manifest-sector').scrollIntoView({ behavior: 'smooth' });
+                printOutput("Display context localized to Manifest Matrix.");
+                break;
+
+            case 'logs':
+                if (!arg) {
+                    logs.forEach(log => log.classList.remove('hidden'));
+                    printOutput("All incident logs loaded into memory buffer.");
+                } else if (arg === '--vance' || arg === '--caso' || arg === '--finch') {
+                    const filterTag = arg.replace('--', '');
+                    let matches = 0;
+                    logs.forEach(log => {
+                        const tags = log.getAttribute('data-tags').split(' ');
+                        if (tags.includes(filterTag)) {
+                            log.classList.remove('hidden');
+                            matches++;
+                        } else {
+                            log.classList.add('hidden');
+                        }
+                    });
+                    document.getElementById('logs-sector').scrollIntoView({ behavior: 'smooth' });
+                    printOutput(`Isolated execution stream. Logs containing [${filterTag}]: ${matches} found.`);
+                } else {
+                    printOutput(`Error: Invalid stream delimiter [${arg}]. Use --vance, --caso, or --finch.`);
+                }
+                break;
+
+            case 'diagnose':
+                printOutput("CRITICAL WARN: Executing structural diagnostic. Reality variance detected.");
+                screen.classList.add('screen-tear');
+                setTimeout(() => {
+                    screen.classList.remove('screen-tear');
+                    printOutput("Diagnostic complete. Consensus stabilized manually by Agent Vance.");
+                }, 1500);
+                break;
+
+            default:
+                printOutput(`Command exception: '${cmd}' unrecognized. Execution aborted.`);
+        }
+    }
+</script>
+</body>
+</html>
