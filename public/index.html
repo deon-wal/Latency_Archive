@@ -2,37 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE LATENCY ARCHIVE</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #0c0d0e; color: #e2e8f0; font-family: 'Courier New', monospace; padding: 50px; }
+        .container { max-width: 800px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #444; padding: 10px; text-align: left; }
+    </style>
 </head>
 <body>
-    <nav class="system-nav">
-        <span class="nav-title">SYS.LOC // SECTOR-04</span>
-        <button onclick="window.location.reload()">PURGE MEM</button>
-    </nav>
-
     <div class="container">
-        <header>
-            <h1>[ THE LATENCY ARCHIVE ]</h1>
-        </header>
-
+        <h1>[ THE LATENCY ARCHIVE ]</h1>
         <section id="manifest-sector">
             <h2>👥 Character Manifest</h2>
-            <table id="manifest-table">
+            <table>
                 <thead><tr><th>Character</th><th>Role</th><th>Profile</th></tr></thead>
-                <tbody></tbody>
+                <tbody id="table-body">
+                    </tbody>
             </table>
         </section>
-
-        <div class="terminal-interface" id="terminal-interface">
-            <div class="terminal-output" id="output-screen">System Initialized. Type 'manifest' to load data.</div>
-            <div class="terminal-input-row">
-                <span class="terminal-prompt">SYSTEM@CORE:></span>
-                <input type="text" id="terminal-command" autofocus autocomplete="off">
-            </div>
-        </div>
     </div>
-    <script type="module" src="app.js"></script>
+
+    <script>
+        const manifest = [
+            { name: "Vance", role: "Agent", profile: "Frayed, hollowed eyes." },
+            { name: "Coordinator Caso", role: "Anchor", profile: "Cinematic perfection." },
+            { name: "Finch", role: "Corruption", profile: "Erratic, ghost images." }
+        ];
+
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = manifest.map(c => 
+            `<tr><td>${c.name}</td><td>${c.role}</td><td>${c.profile}</td></tr>`
+        ).join('');
+    </script>
 </body>
 </html>
