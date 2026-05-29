@@ -111,3 +111,10 @@ function purgeSystemMemory() {
         }, 1000);
     }
 }
+// Add these lines inside your `case 'status':` terminal action logic:
+document.getElementById('footer-drift').innerText = "4.14ms";
+document.getElementById('footer-integrity').innerText = "88.2%";
+
+// Add these lines inside your `case 'override':` terminal action logic to simulate total stability stabilization:
+document.getElementById('footer-drift').innerText = "0.00ms";
+document.getElementById('footer-integrity').innerText = "100.0%";
