@@ -11,6 +11,36 @@
     --copper-strap: linear-gradient(90deg, #5c2c16 0%, #b45309 30%, #3a1a0b 45%, #b45309 70%, #1c0d06 100%);
 }
 
+/* === GLOBAL ARCHITECTURE & CRT EFFECT === */
+body {
+    padding-top: 75px !important;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    line-height: 1.7;
+    margin: 0;
+    padding: 30px;
+    overflow-x: hidden;
+    position: relative;
+    background-image: 
+        radial-gradient(circle at center, rgba(30, 41, 59, 0.05) 0%, rgba(0,0,0,0.98) 85%),
+        linear-gradient(180deg, #0c0d0e 40%, #1e2022 75%, #2a2c2e 100%);
+    background-attachment: fixed;
+}
+
+/* Hard CRT Raster Scanline Layer */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
+    z-index: 9999;
+    background-size: 100% 5px, 4px 100%;
+    pointer-events: none;
+}
+
 /* === BRUTALIST SYSTEM NAVBAR === */
 .system-nav {
     position: fixed;
@@ -94,37 +124,214 @@
     box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
 }
 
-/* Offset body container so fixed navbar doesn't clip content */
-body {
-    padding-top: 75px !important;
-    background-color: var(--bg-color);
+/* === MAIN CHASSIS CONTEXT === */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(11, 12, 13, 0.9);
+    padding: 30px;
+    border: 2px solid var(--dim-text);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    position: relative;
+    animation: chassis-vibration 8s infinite linear;
+}
+
+header {
+    border-bottom: 4px double var(--text-color);
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+    animation: terminal-flicker 0.25s infinite;
+}
+
+h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 2px 2px rgba(226, 232, 240, 0.4),
+        0 5px 6px rgba(226, 232, 240, 0.2),
+        0 9px 12px rgba(226, 232, 240, 0.1);
+}
+
+h2 {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-top: 50px;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    position: relative;
+    border: none;
+}
+
+h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--copper-strap);
+}
+
+/* === MANIFEST MATRIX DATA TABLES === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+th {
+    background-color: var(--dim-text);
+    color: var(--bg-color);
+    padding: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: 1px solid var(--text-color);
+}
+
+td {
+    padding: 15px;
+    border: 1px solid var(--dim-text);
+    vertical-align: top;
+}
+
+/* Dynamic Character Matrix Glitch Targets */
+tr[data-char] {
+    transform: skewX(var(--skew-angle, 0deg));
+    filter: blur(var(--blur-strength, 0px));
+    transition: all 0.3s ease;
+}
+
+tr[data-char="vance"] {
+    color: #cbd5e1;
+    text-shadow: 3px 2px 2px rgba(148, 163, 184, 0.3);
+}
+
+tr[data-char="caso"] {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+tr[data-char="finch"] {
+    color: #fda4af;
+    position: relative;
+}
+
+tr[data-char="finch"]:hover {
+    text-shadow: -3px 0 0 rgba(244, 63, 94, 0.6), 3px 0 0 rgba(56, 189, 248, 0.6);
+    background: rgba(244, 63, 94, 0.05);
+}
+
+/* === SYSTEM INCIDENT LOGS === */
+.log-container {
+    margin-top: 20px;
+}
+
+.log {
+    background: rgba(5, 5, 6, 0.9);
+    margin-bottom: 40px;
+    padding: 25px;
+    border-left: 4px solid var(--text-color);
+    border-right: 1px solid rgba(71, 85, 105, 0.4);
+    border-top: 1px solid var(--dim-text);
+    border-bottom: 1px solid var(--dim-text);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    transform: perspective(500px) rotateY(0.5deg);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1), transform 0.5s ease, filter 0.5s ease, max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
+    opacity: 1;
+    filter: blur(0px) contrast(100%);
+    height: auto;
+    max-height: 1000px;
+    overflow: hidden;
+}
+
+.log:hover {
+    transform: scale(1.01) perspective(0px) rotateY(0deg);
+    border: 1px solid var(--caso-glow);
+    border-left: 4px solid var(--caso-glow);
+    background: #000000;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+/* Console terminal logic stream filtering toggles */
+.log.hidden {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+    filter: blur(8px) contrast(200%);
+    pointer-events: none;
+    max-height: 0;
+    padding: 0 25px;
+    margin: 0;
+    border-top: none;
+    border-bottom: none;
+}
+
+.log-meta {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--dim-text);
+    padding-bottom: 5px;
+}
+
+code {
+    background-color: rgba(255, 51, 51, 0.15);
+    color: var(--alert-color);
+    padding: 2px 6px;
+    font-family: var(--font-mono);
+    border: 1px solid rgba(255, 51, 51, 0.3);
+}
+
+/* === TERMINAL OPERATIONAL INTERFACE === */
+.terminal-interface {
+    margin-top: 50px;
+    background: #050506;
+    border: 1px solid var(--dim-text);
+    padding: 20px;
+    box-shadow: inset 0 0 15px #000;
+}
+
+.terminal-output {
+    height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    color: var(--amber-terminal);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.terminal-input-row {
+    display: flex;
+    align-items: center;
+}
+
+.terminal-prompt {
+    color: var(--dim-text);
+    margin-right: 10px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.terminal-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
     color: var(--text-color);
     font-family: var(--font-mono);
-    line-height: 1.7;
-    margin: 0;
-    padding: 30px;
-    overflow-x: hidden;
-    position: relative;
-    background-image: 
-        radial-gradient(circle at center, rgba(30, 41, 59, 0.05) 0%, rgba(0,0,0,0.98) 85%),
-        linear-gradient(180deg, #0c0d0e 40%, #1e2022 75%, #2a2c2e 100%);
-    background-attachment: fixed;
+    font-size: 0.9rem;
 }
 
-/* Hard CRT Raster Scanline Layer */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
-    z-index: 9999;
-    background-size: 100% 5px, 4px 100%;
-    pointer-events: none;
-}
-
-/* === BRUTALIST SYSTEM FOOTER === */
+/* === SYSTEM FOOTER METRICS === */
 .system-footer {
     margin-top: 80px;
     padding-top: 30px;
@@ -189,263 +396,48 @@ body::before {
     font-weight: bold;
 }
 
+/* === RESPONSIVE REFACtORING === */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+        padding-top: 65px !important;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+
+    .system-nav {
+        padding: 0 10px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 }
 
-/* === CONTAINER & CHASSIS INTERFACES === */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: rgba(11, 12, 13, 0.9);
-    padding: 30px;
-    border: 2px solid var(--dim-text);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
-    position: relative;
-    animation: chassis-vibration 8s infinite linear;
+/* === DYNAMIC GLITCH KEYFRAMES === */
+@keyframes terminal-flicker {
+    0% { opacity: 0.98; }
+    100% { opacity: 1; }
 }
 
-header {
-    border-bottom: 4px double var(--text-color);
-    padding-bottom: 25px;
-    margin-bottom: 40px;
-    animation: terminal-flicker 0.25s infinite;
-}
-
-h1 {
-    font-size: 2.3rem;
-    margin: 0;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    text-shadow: 
-        0 2px 2px rgba(226, 232, 240, 0.4),
-        0 5px 6px rgba(226, 232, 240, 0.2),
-        0 9px 12px rgba(226, 232, 240, 0.1);
-}
-
-h2 {
-    font-size: 1.3rem;
-    letter-spacing: 3px;
-    margin-top: 50px;
-    text-transform: uppercase;
-    padding-bottom: 12px;
-    position: relative;
-    border: none;
-}
-
-h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--copper-strap);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: rgba(0, 0, 0, 0.6);
-}
-
-th {
-    background-color: var(--dim-text);
-    color: var(--bg-color);
-    padding: 14px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    border: 1px solid var(--text-color);
-}
-
-td {
-    padding: 15px;
-    border: 1px solid var(--dim-text);
-    vertical-align: top;
-}
-
-tr[data-char="vance"] {
-    color: #cbd5e1;
-    text-shadow: 3px 2px 2px rgba(148, 163, 184, 0.3);
-}
-
-tr[data-char="caso"] {
-    color: #ffffff;
-    font-weight: bold;
-    text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(56, 189, 248, 0.2);
-}
-
-tr[data-char="finch"] {
-    color: #fda4af;
-    position: relative;
-    animation: finch-decay 1.5s infinite linear;
-    transition: all 0.3s ease;
-}
-
-tr[data-char="finch"]:hover {
-    text-shadow: -3px 0 0 rgba(244, 63, 94, 0.6), 3px 0 0 rgba(56, 189, 248, 0.6);
-    background: rgba(244, 63, 94, 0.05);
-}
-
-.log-container {
-    margin-top: 20px;
-}
-
-.log {
-    background: rgba(5, 5, 6, 0.9);
-    margin-bottom: 40px;
-    padding: 25px;
-    border-left: 4px solid var(--text-color);
-    border-right: 1px solid rgba(71, 85, 105, 0.4);
-    border-top: 1px solid var(--dim-text);
-    border-bottom: 1px solid var(--dim-text);
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
-    transform: perspective(500px) rotateY(0.5deg);
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1), transform 0.5s ease, filter 0.5s ease;
-    opacity: 1;
-    filter: blur(0px) contrast(100%);
-}
-
-.log:hover {
-    transform: scale(1.01) perspective(0px) rotateY(0deg);
-    border: 1px solid var(--caso-glow);
-    border-left: 4px solid var(--caso-glow);
-    background: #000000;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
-}
-
-.log.hidden {
-    display: block !important;
-    visibility: hidden;
-    opacity: 0;
-    transform: scale(0.95) translateY(-5px);
-    filter: blur(8px) contrast(200%);
-    pointer-events: none;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    border: none;
-}
-
-.log-meta {
-    color: #ffffff;
-    font-size: 0.85rem;
-    background: var(--dim-text);
-    display: inline-block;
-    padding: 3px 10px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* Terminal Console Engine */
-.terminal-interface {
-    background-color: #050505;
-    border: 2px solid var(--dim-text);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    padding: 20px;
-}
-
-.terminal-output {
-    max-height: 180px;
-    overflow-y: auto;
-    font-size: 0.9rem;
-    color: var(--amber-terminal);
-    margin-bottom: 15px;
-    white-space: pre-wrap;
-    text-shadow: 0 0 2px rgba(255, 176, 0, 0.5);
-}
-
-.terminal-input-row {
-    display: flex;
-    align-items: center;
-}
-
-.terminal-prompt {
-    margin-right: 12px;
-    color: var(--amber-terminal);
-    font-weight: bold;
-}
-
-.terminal-field {
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    outline: none;
-    text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+@keyframes chassis-vibration {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(0.5px, 0.5px); }
 }
 
 .screen-tear {
-    animation: tear-effect 0.3s infinite linear, overvoltage-flash 0.4s ease-out;
-}
-
-/* === MUTATION & DYNAMIC INTEGRITY ENGINE === */
-#manifest-sector tbody tr {
-    transition: all 0.3s ease;
-    position: relative;
-    --loss-ratio: 0;
-    --blur-strength: 0px;
-    --skew-angle: 0deg;
-}
-
-#manifest-sector tbody tr[data-char] {
-    transform: skewX(var(--skew-angle));
-    filter: blur(var(--blur-strength));
-    text-shadow: 
-        calc(var(--loss-ratio) * -0.1px) 0 0 rgba(244, 63, 94, 0.4),
-        calc(var(--loss-ratio) * 0.1px) 0 0 rgba(56, 189, 248, 0.4);
-}
-
-/* CLEAN REPLACEMENT FOR THE TERNARY LOGIC ERROR: 
-   If JS handles corruption status, have it toggle a `.corrupted` class on the <tr> element */
-#manifest-sector tbody tr.corrupted {
-    animation: finch-decay 2s infinite linear;
-}
-
-/* === INTERACTIVE ANIMATION ARCHITECTURE === */
-@keyframes chassis-vibration {
-    0%, 100% { transform: translate(0, 0); }
-    1% { transform: translate(0.2px, 0.1px); }
-    2% { transform: translate(-0.1px, -0.2px); }
-    3% { transform: translate(0px, 0.2px); }
-    4% { transform: translate(0.1px, -0.1px); }
-    5% { transform: translate(0, 0); }
-}
-
-@keyframes overvoltage-flash {
-    0% { background: #0c0d0e; }
-    15% { background: #ea580c; filter: invert(0.9); }
-    40% { background: #451a03; }
-    100% { background: #0c0d0e; }
-}
-
-@keyframes terminal-flicker {
-    0% { opacity: 0.98; }
-    50% { opacity: 1; }
-    100% { opacity: 0.97; }
-}
-
-@keyframes finch-decay {
-    0% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
-    94% { transform: skewX(0deg); filter: blur(0px); }
-    95% { transform: skewX(-15deg); filter: blur(1px); color: var(--alert-color); }
-    97% { transform: skewX(20deg); text-shadow: -3px 0 #38bdf8, 3px 0 #f43f5e; }
-    99% { transform: skewX(-5deg); filter: blur(2px); }
-    100% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
+    animation: tear-effect 0.3s steps(2) infinite;
 }
 
 @keyframes tear-effect {
-    0% { transform: skewX(0deg) scaleY(1); filter: hue-rotate(0deg) invert(0); }
-    15% { transform: skewX(-4deg) scaleY(1.02); filter: invert(0.2); }
-    30% { transform: skewX(6deg) translateX(-2px); }
-    45% { transform: skewX(0deg) filter: hue-rotate(45deg); }
-    100% { transform: skewX(0deg); }
+    0% { transform: skewX(0deg) scaleY(1); filter: hue-rotate(0deg); }
+    50% { transform: skewX(3deg) scaleY(1.05); filter: hue-rotate(90deg) contrast(150%); }
+    100% { transform: skewX(-2deg) scaleY(0.95); filter: hue-rotate(180deg); }
 }

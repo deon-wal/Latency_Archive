@@ -118,3 +118,5 @@ document.getElementById('footer-integrity').innerText = "88.2%";
 // Add these lines inside your `case 'override':` terminal action logic to simulate total stability stabilization:
 document.getElementById('footer-drift').innerText = "0.00ms";
 document.getElementById('footer-integrity').innerText = "100.0%";
+
+rowElement.classList.add('corrupted');

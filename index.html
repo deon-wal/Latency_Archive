@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- FIXED NAVBAR: Anchored at the top, out of the main container -->
 <nav class="system-nav">
     <div class="nav-left">
         <span class="nav-status-indicator"></span>
@@ -44,8 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Dynamically populated by database system -->
-                </tbody>
+                    </tbody>
             </table>
         </section>
 
@@ -96,7 +94,6 @@
         </section>
     </main>
 
-    <!-- TERMINAL ENTRY PANEL -->
     <div class="terminal-interface" id="terminal-interface">
         <div class="terminal-output" id="output-screen">System Initialized. Type 'help' for terminal operational directives.</div>
         <div class="terminal-input-row">
@@ -105,7 +102,6 @@
         </div>
     </div>
 
-    <!-- REPAIRED FOOTER LOCATION: Safely inside the layout architecture block -->
     <footer class="system-footer">
         <div class="footer-grid">
             <div class="footer-panel">
@@ -132,14 +128,12 @@
 
 </div>
 
-<!-- UNIFIED TERMINAL ENGINE & PERSISTENCE SCRIPT -->
 <script>
     const terminalInput = document.getElementById('terminal-command');
     const terminalOutput = document.getElementById('output-screen');
     const logs = document.querySelectorAll('.log');
     const screen = document.getElementById('terminal-screen');
 
-    // === PERSISTENT LEDGER DATABASE ===
     const defaultManifest = {
         vance: {
             name: "Vance",
@@ -189,9 +183,7 @@
             `;
             tbody.appendChild(tr);
         }
-        if (typeof applyDynamicCorruption === "function") {
-            applyDynamicCorruption();
-        }
+        applyDynamicCorruption();
     }
 
     function applyDynamicCorruption() {
@@ -208,7 +200,6 @@
         }
     }
 
-    // Initialize UI on first execution load
     syncManifestUI();
 
     terminalInput.addEventListener('keydown', function(e) {
@@ -239,16 +230,16 @@
             case 'help':
                 printOutput(
                     "Available System Directives:\n" +
-                    "  status                       - Evaluates regional reality consistency.\n" +
-                    "  manifest                     - Compiles visual database table views.\n" +
+                    "  status                        - Evaluates regional reality consistency.\n" +
+                    "  manifest                      - Compiles visual database table views.\n" +
                     "  logs [--tag]                  - Queries historical event logs. (Flags: --vance, --caso, --finch)\n" +
-                    "  query [id]                   - Pulls low-level registry blocks for an entry.\n" +
+                    "  query [id]                    - Pulls low-level registry blocks for an entry.\n" +
                     "  update [id] \"notes\"          - Appends diagnostic operational logs to asset.\n" +
                     "  register [id] [name] \"prof\"  - Initialized a brand new tracking matrix.\n" +
-                    "  backup                       - Extracts JSON schema payload backup.\n" +
-                    "  export ledger                - Packs dynamic manifest into an offline Markdown file.\n" +
-                    "  diagnose                     - Runs structural variance sweep.\n" +
-                    "  clear                        - Purges console stream buffer."
+                    "  backup                        - Extracts JSON schema payload backup.\n" +
+                    "  export ledger                 - Packs dynamic manifest into an offline Markdown file.\n" +
+                    "  diagnose                      - Runs structural variance sweep.\n" +
+                    "  clear                         - Purges console stream buffer."
                 );
                 break;
 
@@ -399,7 +390,6 @@
         }
     }
 
-    // === NAVBAR SYSTEM AUTOMATION FUNCTIONS ===
     function updateSystemClock() {
         const clockElement = document.getElementById('system-clock');
         if (clockElement) {
