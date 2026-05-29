@@ -8,9 +8,10 @@
     --finch-glow: #f43f5e;
     --amber-terminal: #ffb000;
     --font-mono: 'Courier New', Courier, monospace;
+    --copper-strap: linear-gradient(90deg, #5c2c16 0%, #b45309 30%, #3a1a0b 45%, #b45309 70%, #1c0d06 100%);
 }
 
-/* === ENHANCEMENT: PHOSPHOR BURN-IN & RADIAL VIGNETTE MASK === */
+/* === MODIFICATION 2 & 9: CLAY TIMELINE & HEAVY BUNKER VIGNETTE MASK === */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -20,10 +21,14 @@ body {
     padding: 30px;
     overflow-x: hidden;
     position: relative;
-    background-image: radial-gradient(circle, rgba(30, 41, 59, 0.15) 0%, rgba(0,0,0,0.95) 100%);
+    /* Implements a deep, claustrophobic vignette over the decaying clay gradient background */
+    background-image: 
+        radial-gradient(circle at center, rgba(30, 41, 59, 0.05) 0%, rgba(0,0,0,0.98) 85%),
+        linear-gradient(180deg, #0c0d0e 40%, #1e2022 75%, #2a2c2e 100%);
+    background-attachment: fixed;
 }
 
-/* === ENHANCEMENT: HARD CRT RASTER SCANLINE LAYER === */
+/* Hard CRT Raster Scanline Layer */
 body::before {
     content: " ";
     display: block;
@@ -36,18 +41,20 @@ body::before {
     pointer-events: none;
 }
 
-/* === ENHANCEMENT: BRUTALIST GRID FRAME CONTROLLER === */
+/* === MODIFICATION 7: DYING VACUUM TUBE CHASSIS RUMBLE === */
 .container {
     max-width: 900px;
     margin: 0 auto;
-    background: rgba(15, 23, 42, 0.4);
+    background: rgba(11, 12, 13, 0.9);
     padding: 30px;
     border: 2px solid var(--dim-text);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
     position: relative;
+    /* Adds a continuous low-level structural jitter from the generator hum */
+    animation: chassis-vibration 8s infinite linear;
 }
 
-/* === ENHANCEMENT: POWER TERMINAL FLICKER === */
+/* Power Terminal Flicker */
 header {
     border-bottom: 4px double var(--text-color);
     padding-bottom: 25px;
@@ -55,24 +62,39 @@ header {
     animation: terminal-flicker 0.25s infinite;
 }
 
+/* === MODIFICATION 1: BLEEDING PHOSPHOR DROP-SHADOWS === */
 h1 {
     font-size: 2.3rem;
     margin: 0;
     letter-spacing: 5px;
     text-transform: uppercase;
-    text-shadow: 0 0 4px rgba(226, 232, 240, 0.6);
+    text-shadow: 
+        0 2px 2px rgba(226, 232, 240, 0.4),
+        0 5px 6px rgba(226, 232, 240, 0.2),
+        0 9px 12px rgba(226, 232, 240, 0.1);
 }
 
+/* === MODIFICATION 5: FINCH'S GROUNDING STRAP SEPARATORS === */
 h2 {
     font-size: 1.3rem;
     letter-spacing: 3px;
     margin-top: 50px;
     text-transform: uppercase;
-    border-bottom: 2px dashed var(--dim-text);
-    padding-bottom: 8px;
+    padding-bottom: 12px;
+    position: relative;
+    border: none;
+}
+h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--copper-strap);
 }
 
-/* === ENHANCEMENT: DOUBLE-BORDER MATRIX === */
+/* Double-Border Matrix */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -96,44 +118,74 @@ td {
     vertical-align: top;
 }
 
-/* === ENHANCEMENT: CHARACTER CONTEXT MATRICES === */
+/* Character Context Matrices */
 tr[data-char="vance"] {
     color: #cbd5e1;
-    /* Shadow Lag Effect */
     text-shadow: 3px 2px 2px rgba(148, 163, 184, 0.3);
 }
 
 tr[data-char="caso"] {
     color: #ffffff;
     font-weight: bold;
-    /* Stabilized HD Render */
     text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
+/* === MODIFICATION 8: FINCH GHOST IMAGE TEXT TRAILS === */
 tr[data-char="finch"] {
     color: #fda4af;
-    /* Active Corruption Loop */
+    position: relative;
     animation: finch-decay 1.5s infinite linear;
+    transition: all 0.3s ease;
+}
+tr[data-char="finch"]:hover {
+    /* Generates chromatic, delayed ghost shadows on hover */
+    text-shadow: -3px 0 0 rgba(244, 63, 94, 0.6), 3px 0 0 rgba(56, 189, 248, 0.6);
+    background: rgba(244, 63, 94, 0.05);
 }
 
 .log-container {
     margin-top: 20px;
 }
 
-/* === ENHANCEMENT: HARD-LINE LOG STACKING === */
+/* === MODIFICATION 4: VANCE'S SPLIT-VISION STRUCTURAL SHIFT === */
 .log {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(5, 5, 6, 0.9);
     margin-bottom: 40px;
     padding: 25px;
     border-left: 4px solid var(--text-color);
-    border-right: 1px solid var(--dim-text);
+    border-right: 1px solid rgba(71, 85, 105, 0.4);
     border-top: 1px solid var(--dim-text);
     border-bottom: 1px solid var(--dim-text);
     box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+    transform: perspective(500px) rotateY(0.5deg);
+    
+    /* === MODIFICATION 10: CARBON AEROSOL EXECUTION FADE === */
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 1, 1), transform 0.5s ease, filter 0.5s ease;
+    opacity: 1;
+    filter: blur(0px) contrast(100%);
 }
 
+/* === MODIFICATION 3: CASO'S CONSENSUS ANCHOR RADIUS === */
+.log:hover {
+    transform: scale(1.01) perspective(0px) rotateY(0deg);
+    border: 1px solid var(--caso-glow);
+    border-left: 4px solid var(--caso-glow);
+    background: #000000;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+/* Replaces default hidden behavior with pixelating aerosol decay */
 .log.hidden {
-    display: none;
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+    filter: blur(8px) contrast(200%);
+    pointer-events: none;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 .log-meta {
@@ -147,12 +199,21 @@ tr[data-char="finch"] {
     letter-spacing: 1px;
 }
 
-/* === INTERACTIVE CONSOLE INTERFACE === */
+/* Interactive Console Interface */
 footer {
     margin-top: 60px;
-    border-top: 3px double var(--dim-text);
     padding-top: 25px;
     padding-bottom: 40px;
+    position: relative;
+}
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--copper-strap);
 }
 
 .terminal-interface {
@@ -194,18 +255,63 @@ footer {
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
-/* SCREEN TEAR GLITCH TRANSITION ENGINE */
+/* === MODIFICATION 6: BURNT COPPER OVER-VOLTAGE FLASH === */
 .screen-tear {
-    animation: tear-effect 0.3s infinite linear;
+    animation: tear-effect 0.3s infinite linear, overvoltage-flash 0.4s ease-out;
 }
 
-/* === ANIMATION SUBSYSTEMS === */
+/* === INTERACTIVE ANIMATION ARCHITECTURE === */
+
+/* Micro-jitter mechanical vibrations */
+@keyframes chassis-vibration {
+    0%, 100% { transform: translate(0, 0); }
+    1% { transform: translate(0.2px, 0.1px); }
+    2% { transform: translate(-0.1px, -0.2px); }
+    3% { transform: translate(0px, 0.2px); }
+    4% { transform: translate(0.1px, -0.1px); }
+    5% { transform: translate(0, 0); }
+}
+
+/* Intense color dump on structural diagnostic error */
+@keyframes overvoltage-flash {
+    0% { background: #0c0d0e; }
+    15% { background: #ea580c; filter: invert(0.9); }
+    40% { background: #451a03; }
+    100% { background: #0c0d0e; }
+}
+
 @keyframes terminal-flicker {
     0% { opacity: 0.98; }
     50% { opacity: 1; }
     100% { opacity: 0.97; }
 }
+/* Dynamic Entity Mutation Engine */
+#manifest-sector tbody tr {
+    transition: all 0.3s ease;
+    position: relative;
+    
+    /* Fallbacks if properties aren't calculated yet */
+    --loss-ratio: 0;
+    --blur-strength: 0px;
+    --skew-angle: 0deg;
+}
 
+/* Apply data-driven corruption directly based on the entity's database integrity */
+#manifest-sector tbody tr[data-char] {
+    /* As integrity falls, text skews out of true vertical alignment and slightly blurs */
+    transform: skewX(var(--skew-angle));
+    filter: blur(var(--blur-strength));
+    
+    /* Layered ghost shadows intensify based on data loss ratio */
+    text-shadow: 
+        calc(var(--loss-ratio) * -0.1px) 0 0 rgba(244, 63, 94, 0.4),
+        calc(var(--loss-ratio) * 0.1px) 0 0 rgba(56, 189, 248, 0.4);
+}
+
+/* If integrity drops below 40%, trigger an erratic active code decay loop */
+#manifest-sector tbody tr {
+    animation: var(--loss-ratio) > 60 ? finch-decay 2s infinite linear : none;
+}
 @keyframes finch-decay {
     0% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
     94% { transform: skewX(0deg); filter: blur(0px); }
