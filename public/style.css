@@ -1,0 +1,224 @@
+:root {
+    --bg-color: #0c0d0e;
+    --text-color: #e2e8f0; 
+    --dim-text: #475569;
+    --alert-color: #ff3333;
+    --vance-glow: #94a3b8;
+    --caso-glow: #38bdf8;
+    --finch-glow: #f43f5e;
+    --amber-terminal: #ffb000;
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+/* === ENHANCEMENT: PHOSPHOR BURN-IN & RADIAL VIGNETTE MASK === */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    line-height: 1.7;
+    margin: 0;
+    padding: 30px;
+    overflow-x: hidden;
+    position: relative;
+    background-image: radial-gradient(circle, rgba(30, 41, 59, 0.15) 0%, rgba(0,0,0,0.95) 100%);
+}
+
+/* === ENHANCEMENT: HARD CRT RASTER SCANLINE LAYER === */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 9999;
+    background-size: 100% 5px, 4px 100%;
+    pointer-events: none;
+}
+
+/* === ENHANCEMENT: BRUTALIST GRID FRAME CONTROLLER === */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 30px;
+    border: 2px solid var(--dim-text);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+/* === ENHANCEMENT: POWER TERMINAL FLICKER === */
+header {
+    border-bottom: 4px double var(--text-color);
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+    animation: terminal-flicker 0.25s infinite;
+}
+
+h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 4px rgba(226, 232, 240, 0.6);
+}
+
+h2 {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-top: 50px;
+    text-transform: uppercase;
+    border-bottom: 2px dashed var(--dim-text);
+    padding-bottom: 8px;
+}
+
+/* === ENHANCEMENT: DOUBLE-BORDER MATRIX === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+th {
+    background-color: var(--dim-text);
+    color: var(--bg-color);
+    padding: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: 1px solid var(--text-color);
+}
+
+td {
+    padding: 15px;
+    border: 1px solid var(--dim-text);
+    vertical-align: top;
+}
+
+/* === ENHANCEMENT: CHARACTER CONTEXT MATRICES === */
+tr[data-char="vance"] {
+    color: #cbd5e1;
+    /* Shadow Lag Effect */
+    text-shadow: 3px 2px 2px rgba(148, 163, 184, 0.3);
+}
+
+tr[data-char="caso"] {
+    color: #ffffff;
+    font-weight: bold;
+    /* Stabilized HD Render */
+    text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+tr[data-char="finch"] {
+    color: #fda4af;
+    /* Active Corruption Loop */
+    animation: finch-decay 1.5s infinite linear;
+}
+
+.log-container {
+    margin-top: 20px;
+}
+
+/* === ENHANCEMENT: HARD-LINE LOG STACKING === */
+.log {
+    background: rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    padding: 25px;
+    border-left: 4px solid var(--text-color);
+    border-right: 1px solid var(--dim-text);
+    border-top: 1px solid var(--dim-text);
+    border-bottom: 1px solid var(--dim-text);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+}
+
+.log.hidden {
+    display: none;
+}
+
+.log-meta {
+    color: #ffffff;
+    font-size: 0.85rem;
+    background: var(--dim-text);
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* === INTERACTIVE CONSOLE INTERFACE === */
+footer {
+    margin-top: 60px;
+    border-top: 3px double var(--dim-text);
+    padding-top: 25px;
+    padding-bottom: 40px;
+}
+
+.terminal-interface {
+    background-color: #050505;
+    border: 2px solid var(--dim-text);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+}
+
+.terminal-output {
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--amber-terminal);
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    text-shadow: 0 0 2px rgba(255, 176, 0, 0.5);
+}
+
+.terminal-input-row {
+    display: flex;
+    align-items: center;
+}
+
+.terminal-prompt {
+    margin-right: 12px;
+    color: var(--amber-terminal);
+    font-weight: bold;
+}
+
+.terminal-field {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    outline: none;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* SCREEN TEAR GLITCH TRANSITION ENGINE */
+.screen-tear {
+    animation: tear-effect 0.3s infinite linear;
+}
+
+/* === ANIMATION SUBSYSTEMS === */
+@keyframes terminal-flicker {
+    0% { opacity: 0.98; }
+    50% { opacity: 1; }
+    100% { opacity: 0.97; }
+}
+
+@keyframes finch-decay {
+    0% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
+    94% { transform: skewX(0deg); filter: blur(0px); }
+    95% { transform: skewX(-15deg); filter: blur(1px); color: var(--alert-color); }
+    97% { transform: skewX(20deg); text-shadow: -3px 0 #38bdf8, 3px 0 #f43f5e; }
+    99% { transform: skewX(-5deg); filter: blur(2px); }
+    100% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
+}
+
+@keyframes tear-effect {
+    0% { transform: skewX(0deg) scaleY(1); filter: hue-rotate(0deg) invert(0); }
+    15% { transform: skewX(-4deg) scaleY(1.02); filter: invert(0.2); }
+    30% { transform: skewX(6deg) translateX(-2px); }
+    45% { transform: skewX(0deg) filter: hue-rotate(45deg); }
+    100% { transform: skewX(0deg); }
+}
