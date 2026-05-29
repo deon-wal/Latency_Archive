@@ -87,3 +87,27 @@ export const SYSTEM_DIAGNOSTICS = {
     integrity: "88.2%",
     vector: "Finch [UNINDEXED]"
 };
+// === SYSTEM NAV CLOCK AUTOMATION ===
+function updateSystemClock() {
+    const clockElement = document.getElementById('system-clock');
+    if (!clockElement) return;
+    
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+    clockElement.innerText = `${timeString} SYSTEM_CLK`;
+}
+setInterval(updateSystemClock, 1000);
+updateSystemClock(); // Instant trigger
+
+// === VOLATILE MEMORY PURGE (NAVBAR BUTTON & COMMAND) ===
+function purgeSystemMemory() {
+    if (confirm("CRITICAL DIRECTIVE: Clear local memory banks and reset timeline variables back to default values?")) {
+        localStorage.removeItem('latency_ledger');
+        localStorage.removeItem('latency_logs');
+        printOutput("SYSTEM WARNING: Core memory banks purged. Re-initializing terminal defaults...");
+        
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    }
+}

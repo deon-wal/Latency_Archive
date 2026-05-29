@@ -16,6 +16,22 @@
     </header>
 
     <main>
+
+    <nav class="system-nav">
+    <div class="nav-left">
+        <span class="nav-status-indicator"></span>
+        <span class="nav-title">SYS.LOC // SECTOR-04</span>
+    </div>
+    <div class="nav-links">
+        <a href="#manifest-sector" class="nav-item">MANIFEST</a>
+        <a href="#logs-sector" class="nav-item">LOGS</a>
+        <a href="#terminal-interface" class="nav-item">CONSOLE</a>
+    </div>
+    <div class="nav-right">
+        <span id="system-clock" class="nav-clock">00:00:00 UTC</span>
+        <button onclick="purgeSystemMemory()" class="nav-purge-btn">PURGE MEM</button>
+    </div>
+</nav>
         <section id="manifest-sector">
             <h2>👥 Character Manifest</h2>
             <table>
