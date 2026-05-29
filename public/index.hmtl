@@ -421,4 +421,27 @@ function applyDynamicCorruption() {
     }
 }
 </body>
+<footer class="system-footer">
+    <div class="footer-grid">
+        <div class="footer-panel">
+            <span class="panel-label">LOCATION REFS</span>
+            <div class="panel-data">LOC // SECTOR-04</div>
+            <div class="panel-data">SUBSTRUCTURE // LEVEL-B</div>
+        </div>
+        <div class="footer-panel">
+            <span class="panel-label">METRIC QUANTUM</span>
+            <div class="panel-data">DRIFT: <span id="footer-drift">4.14ms</span></div>
+            <div class="panel-data">RENDER INT: <span id="footer-integrity">88.2%</span></div>
+        </div>
+        <div class="footer-panel">
+            <span class="panel-label">CORE COMPILE</span>
+            <div class="panel-data">ENGINE // SUBSTRATE.v2</div>
+            <div class="panel-data">TARGET // LATENCY_LOG</div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="copyright">RESTRICTED DATA SYSTEM // AUTHORIZED PERSONNEL ONLY</div>
+        <div class="system-sig">0x00FF4A_ALPHA</div>
+    </div>
+</footer>
 </html>
