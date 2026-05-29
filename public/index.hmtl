@@ -8,16 +8,8 @@
 </head>
 <body>
 
-<div class="container" id="terminal-screen">
-
-    <header>
-        <h1>[ THE LATENCY ARCHIVE ]</h1>
-        <p>System Consensus: VERIFIED // Local Anchor Status: NOMINAL</p>
-    </header>
-
-    <main>
-
-    <nav class="system-nav">
+<!-- FIXED NAVBAR: Anchored at the top, out of the main container -->
+<nav class="system-nav">
     <div class="nav-left">
         <span class="nav-status-indicator"></span>
         <span class="nav-title">SYS.LOC // SECTOR-04</span>
@@ -32,6 +24,15 @@
         <button onclick="purgeSystemMemory()" class="nav-purge-btn">PURGE MEM</button>
     </div>
 </nav>
+
+<div class="container" id="terminal-screen">
+
+    <header>
+        <h1>[ THE LATENCY ARCHIVE ]</h1>
+        <p>System Consensus: VERIFIED // Local Anchor Status: NOMINAL</p>
+    </header>
+
+    <main>
         <section id="manifest-sector">
             <h2>👥 Character Manifest</h2>
             <table>
@@ -43,21 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-char="vance">
-                        <td><strong>Vance</strong></td>
-                        <td>Host Verification Agent / Low-Priority Glitch</td>
-                        <td>Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.</td>
-                    </tr>
-                    <tr data-char="caso">
-                        <td><strong>Coordinator Caso</strong></td>
-                        <td>High-Priority Render / High-Definition Anchor</td>
-                        <td>Ana de Armas type; cinematic perfection, stabilizes local reality.</td>
-                    </tr>
-                    <tr data-char="finch">
-                        <td><strong>Finch</strong></td>
-                        <td>Corrupted Element / Active Corruption</td>
-                        <td>Mia Goth type; erratic, ghost images, numb to reality collapse.</td>
-                    </tr>
+                    <!-- Dynamically populated by database system -->
                 </tbody>
             </table>
         </section>
@@ -109,30 +96,126 @@
         </section>
     </main>
 
-    <footer>
-        <div class="terminal-interface">
-            <div class="terminal-output" id="output-screen">System Initialized. Type 'help' for terminal operational directives.</div>
-            <div class="terminal-input-row">
-                <span class="terminal-prompt">SYSTEM@CORE:&gt;</span>
-                <input type="text" id="terminal-command" class="terminal-field" autofocus autocomplete="off" spellcheck="false">
+    <!-- TERMINAL ENTRY PANEL -->
+    <div class="terminal-interface" id="terminal-interface">
+        <div class="terminal-output" id="output-screen">System Initialized. Type 'help' for terminal operational directives.</div>
+        <div class="terminal-input-row">
+            <span class="terminal-prompt">SYSTEM@CORE:&gt;</span>
+            <input type="text" id="terminal-command" class="terminal-field" autofocus autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <!-- REPAIRED FOOTER LOCATION: Safely inside the layout architecture block -->
+    <footer class="system-footer">
+        <div class="footer-grid">
+            <div class="footer-panel">
+                <span class="panel-label">LOCATION REFS</span>
+                <div class="panel-data">LOC // SECTOR-04</div>
+                <div class="panel-data">SUBSTRUCTURE // LEVEL-B</div>
             </div>
+            <div class="footer-panel">
+                <span class="panel-label">METRIC QUANTUM</span>
+                <div class="panel-data">DRIFT: <span id="footer-drift">4.14ms</span></div>
+                <div class="panel-data">RENDER INT: <span id="footer-integrity">88.2%</span></div>
+            </div>
+            <div class="footer-panel">
+                <span class="panel-label">CORE COMPILE</span>
+                <div class="panel-data">ENGINE // SUBSTRATE.v2</div>
+                <div class="panel-data">TARGET // LATENCY_LOG</div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">RESTRICTED DATA SYSTEM // AUTHORIZED PERSONNEL ONLY</div>
+            <div class="system-sig">0x00FF4A_ALPHA</div>
         </div>
     </footer>
 
 </div>
 
+<!-- UNIFIED TERMINAL ENGINE & PERSISTENCE SCRIPT -->
 <script>
     const terminalInput = document.getElementById('terminal-command');
     const terminalOutput = document.getElementById('output-screen');
     const logs = document.querySelectorAll('.log');
     const screen = document.getElementById('terminal-screen');
 
+    // === PERSISTENT LEDGER DATABASE ===
+    const defaultManifest = {
+        vance: {
+            name: "Vance",
+            role: "Host Verification Agent / Low-Priority Glitch",
+            profile: "Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.",
+            integrity: "74.2%",
+            offset: "0x00FF4A",
+            notes: "Exhibiting structural delay. Memory streams run parallel on triple shifts."
+        },
+        caso: {
+            name: "Coordinator Caso",
+            role: "High-Priority Render / High-Definition Anchor",
+            profile: "Ana de Armas type; cinematic perfection, stabilizes local reality.",
+            integrity: "99.9%",
+            offset: "0xFFFFFF",
+            notes: "Absolute render lock. Core routing active. Automatically stabilizes local clay zones."
+        },
+        finch: {
+            name: "Finch",
+            role: "Corrupted Element / Active Corruption",
+            profile: "Mia Goth type; erratic, ghost images, numb to reality collapse.",
+            integrity: "12.4%",
+            offset: "0x000000",
+            notes: "Unindexed loop threat. Carrying rusted grounding strap. Singing dead assembly code."
+        }
+    };
+
+    let ledger = JSON.parse(localStorage.getItem('latency_ledger')) || defaultManifest;
+
+    function saveLedger() {
+        localStorage.setItem('latency_ledger', JSON.stringify(ledger));
+    }
+
+    function syncManifestUI() {
+        const tbody = document.querySelector('#manifest-sector table tbody');
+        if (!tbody) return;
+        
+        tbody.innerHTML = '';
+        for (const key in ledger) {
+            const entity = ledger[key];
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-char', key);
+            tr.innerHTML = `
+                <td><strong>${entity.name}</strong></td>
+                <td>${entity.role} [INT: ${entity.integrity}]</td>
+                <td>${entity.profile}</td>
+            `;
+            tbody.appendChild(tr);
+        }
+        if (typeof applyDynamicCorruption === "function") {
+            applyDynamicCorruption();
+        }
+    }
+
+    function applyDynamicCorruption() {
+        for (const key in ledger) {
+            const entity = ledger[key];
+            const row = document.querySelector(`tr[data-char="${key}"]`);
+            if (row) {
+                const integrityNum = parseFloat(entity.integrity) || 100;
+                const loss = 100 - integrityNum;
+                row.style.setProperty('--loss-ratio', `${loss}`);
+                row.style.setProperty('--blur-strength', `${(loss * 0.05).toFixed(2)}px`);
+                row.style.setProperty('--skew-angle', `${(loss * 0.3).toFixed(1)}deg`);
+            }
+        }
+    }
+
+    // Initialize UI on first execution load
+    syncManifestUI();
+
     terminalInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             const rawInput = this.value.trim();
             this.value = '';
             if (rawInput === '') return;
-
             processCommand(rawInput);
         }
     });
@@ -143,9 +226,12 @@
     }
 
     function processCommand(input) {
-        const parts = input.toLowerCase().split(' ');
-        const cmd = parts[0];
-        const arg = parts[1];
+        const match = input.match(/([^\s"']+|"[^"]*"|'[^']*')/g);
+        if (!match) return;
+        
+        const parts = match.map(p => p.replace(/^["']|["']$/g, ''));
+        const cmd = parts[0].toLowerCase();
+        const target = parts[1] ? parts[1].toLowerCase() : null;
 
         printOutput(`> ${input}`);
 
@@ -153,11 +239,16 @@
             case 'help':
                 printOutput(
                     "Available System Directives:\n" +
-                    "  status                - Evaluates regional reality consistency.\n" +
-                    "  manifest              - Pulls up target data records.\n" +
-                    "  logs [--tag]          - Queries system events. (Flags: --vance, --caso, --finch)\n" +
-                    "  diagnose              - Runs a low-level diagnostic sweep.\n" +
-                    "  clear                 - Clears the terminal feedback buffer."
+                    "  status                       - Evaluates regional reality consistency.\n" +
+                    "  manifest                     - Compiles visual database table views.\n" +
+                    "  logs [--tag]                  - Queries historical event logs. (Flags: --vance, --caso, --finch)\n" +
+                    "  query [id]                   - Pulls low-level registry blocks for an entry.\n" +
+                    "  update [id] \"notes\"          - Appends diagnostic operational logs to asset.\n" +
+                    "  register [id] [name] \"prof\"  - Initialized a brand new tracking matrix.\n" +
+                    "  backup                       - Extracts JSON schema payload backup.\n" +
+                    "  export ledger                - Packs dynamic manifest into an offline Markdown file.\n" +
+                    "  diagnose                     - Runs structural variance sweep.\n" +
+                    "  clear                        - Purges console stream buffer."
                 );
                 break;
 
@@ -175,11 +266,11 @@
                 break;
 
             case 'logs':
-                if (!arg) {
+                if (!target) {
                     logs.forEach(log => log.classList.remove('hidden'));
                     printOutput("All incident logs loaded into memory buffer.");
-                } else if (arg === '--vance' || arg === '--caso' || arg === '--finch') {
-                    const filterTag = arg.replace('--', '');
+                } else if (target === '--vance' || target === '--caso' || target === '--finch') {
+                    const filterTag = target.replace('--', '');
                     let matches = 0;
                     logs.forEach(log => {
                         const tags = log.getAttribute('data-tags').split(' ');
@@ -193,7 +284,104 @@
                     document.getElementById('logs-sector').scrollIntoView({ behavior: 'smooth' });
                     printOutput(`Isolated execution stream. Logs containing [${filterTag}]: ${matches} found.`);
                 } else {
-                    printOutput(`Error: Invalid stream delimiter [${arg}]. Use --vance, --caso, or --finch.`);
+                    printOutput(`Error: Invalid stream delimiter. Use --vance, --caso, or --finch.`);
+                }
+                break;
+
+            case 'query':
+                if (target && ledger[target]) {
+                    const item = ledger[target];
+                    printOutput(
+                        `[REGISTRY BLOCK: ${target.toUpperCase()}]\n` +
+                        `--------------------------------------\n` +
+                        `DESIGNATION: ${item.name}\n` +
+                        `ROLE INDEX : ${item.role}\n` +
+                        `INTEGRITY  : ${item.integrity}\n` +
+                        `RAM OFFSET : ${item.offset}\n` +
+                        `DIAGNOSTIC : ${item.notes}`
+                    );
+                } else {
+                    printOutput(`Query Exception: Missing or unindexed target [${parts[1] || ''}].`);
+                }
+                break;
+
+            case 'update':
+                if (target && ledger[target] && parts[2]) {
+                    const updatedNotes = parts.slice(2).join(' ');
+                    ledger[target].notes = updatedNotes;
+                    
+                    let numericalInt = parseFloat(ledger[target].integrity);
+                    if (!isNaN(numericalInt)) {
+                        ledger[target].integrity = Math.max(0, (numericalInt - 2.4)).toFixed(1) + "%";
+                    }
+
+                    saveLedger();
+                    syncManifestUI();
+                    printOutput(`LEDGER COMMIT: Record [${target}] updated successfully. Stability recalculated.`);
+                } else {
+                    printOutput("Syntax Exception: Use -> update [id] \"Your tracking log updates here\"");
+                }
+                break;
+
+            case 'register':
+                if (target && parts[2] && parts[3]) {
+                    if (ledger[target]) {
+                        printOutput(`Allocation Aborted: Identifier [${target}] already owns database reference.`);
+                        break;
+                    }
+                    
+                    const entityName = parts[2];
+                    const entityProfile = parts.slice(3).join(' ');
+                    
+                    ledger[target] = {
+                        name: entityName,
+                        role: "Unclassified System Asset / Ingestion Phase",
+                        profile: entityProfile,
+                        integrity: "100.0%",
+                        offset: "0x" + Math.floor(Math.random()*16777215).toString(16).toUpperCase(),
+                        notes: "Asset initialized remotely via system terminal execution."
+                    };
+
+                    saveLedger();
+                    syncManifestUI();
+                    printOutput(`REGISTRATION LOGGED: Target [${entityName}] injected into secure storage database.`);
+                } else {
+                    printOutput("Syntax Exception: Use -> register [id] [Name] \"Visual description details\"");
+                }
+                break;
+
+            case 'backup':
+                const blob = new Blob([JSON.stringify(ledger, null, 4)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `sector04_ledger_backup.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                printOutput("SUCCESS: Data structure database exported to JSON file format.");
+                break;
+
+            case 'export':
+                if (target === 'ledger') {
+                    let markdownContent = `# SECURE TERMINAL DATA EXPORT // SYSTEM LEDGER\n\n`;
+                    for (const key in ledger) {
+                        const entity = ledger[key];
+                        markdownContent += `### [[${entity.name}]]\n`;
+                        markdownContent += `- **Role/Designation:** ${entity.role}\n`;
+                        markdownContent += `- **Local Data Integrity:** ${entity.integrity}\n`;
+                        markdownContent += `- **Hex RAM Offset:** \`${entity.offset}\`\n`;
+                        markdownContent += `- **Operational Notes:** ${entity.notes}\n\n---\n\n`;
+                    }
+                    const mdBlob = new Blob([markdownContent], { type: 'text/markdown' });
+                    const mdUrl = URL.createObjectURL(mdBlob);
+                    const mdLink = document.createElement('a');
+                    mdLink.href = mdUrl;
+                    mdLink.download = `sector04_ledger_export.md`;
+                    mdLink.click();
+                    URL.revokeObjectURL(mdUrl);
+                    printOutput(`EXPORT COMPLETE: Markdown file configured for Obsidian syncing.`);
+                } else {
+                    printOutput("Export targets include: 'ledger'");
                 }
                 break;
 
@@ -210,237 +398,25 @@
                 printOutput(`Command exception: '${cmd}' unrecognized. Execution aborted.`);
         }
     }
-</script>
-const terminalInput = document.getElementById('terminal-command');
-const terminalOutput = document.getElementById('output-screen');
-const screen = document.getElementById('terminal-screen');
 
-// === PERSISTENT LEDGER DATABASE ===
-const defaultManifest = {
-    vance: {
-        name: "Vance",
-        role: "Host Verification Agent / Low-Priority Glitch",
-        profile: "Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.",
-        integrity: "74.2%",
-        offset: "0x00FF4A",
-        notes: "Exhibiting structural delay. Memory streams run parallel on triple shifts."
-    },
-    caso: {
-        name: "Coordinator Caso",
-        role: "High-Priority Render / High-Definition Anchor",
-        profile: "Ana de Armas type; cinematic perfection, stabilizes local reality.",
-        integrity: "99.9%",
-        offset: "0xFFFFFF",
-        notes: "Absolute render lock. Core routing active. Automatically stabilizes local clay zones."
-    },
-    finch: {
-        name: "Finch",
-        role: "Corrupted Element / Active Corruption",
-        profile: "Mia Goth type; erratic, ghost images, numb to reality collapse.",
-        integrity: "12.4%",
-        offset: "0x000000",
-        notes: "Unindexed loop threat. Carrying rusted grounding strap. Singing dead assembly code."
-    }
-};
-
-// Load database from storage or seed defaults
-let ledger = JSON.parse(localStorage.getItem('latency_ledger')) || defaultManifest;
-
-// Saves active ledger state to browser storage
-function saveLedger() {
-    localStorage.setItem('latency_ledger', JSON.stringify(ledger));
-}
-
-// Rewrites the HTML table in the Manifest Sector to match active persistent data
-function syncManifestUI() {
-    const tbody = document.querySelector('#manifest-sector tbody');
-    if (!tbody) return;
-    
-    tbody.innerHTML = '';
-    for (const key in ledger) {
-        const entity = ledger[key];
-        const tr = document.createElement('tr');
-        tr.setAttribute('data-char', key);
-        tr.innerHTML = `
-            <td><strong>${entity.name}</strong></td>
-            <td>${entity.role} [INT: ${entity.integrity}]</td>
-            <td>${entity.profile}</td>
-        `;
-        tbody.appendChild(tr);
-    }
-}
-syncManifestUI(); // Initial alignment of UI table
-
-terminalInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        const rawInput = this.value.trim();
-        this.value = '';
-        if (rawInput === '') return;
-        processCommand(rawInput);
-    }
-});
-
-function printOutput(text) {
-    terminalOutput.innerText += '\n' + text;
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-function processCommand(input) {
-    // Regex logic to cleanly handle nested double quotes for descriptions
-    const match = input.match(/([^\s"']+|"[^"]*"|'[^']*')/g);
-    if (!match) return;
-    
-    const parts = match.map(p => p.replace(/^["']|["']$/g, ''));
-    const cmd = parts[0].toLowerCase();
-    const target = parts[1] ? parts[1].toLowerCase() : null;
-
-    printOutput(`> ${input}`);
-
-    switch(cmd) {
-        case 'help':
-            printOutput(
-                "Available System Directives:\n" +
-                "  status                       - Evaluates regional reality consistency.\n" +
-                "  manifest                     - Compiles visual database table views.\n" +
-                "  query [id]                   - Pulls low-level registry blocks for an entry.\n" +
-                "  update [id] \"notes\"          - Appends diagnostic operational logs to asset.\n" +
-                "  register [id] [name] \"prof\"  - Initialized a brand new tracking matrix.\n" +
-                "  diagnose                     - Runs structural variance sweep.\n" +
-                "  clear                        - Purges console stream buffer."
-            );
-            break;
-
-        // === QUERY DATABASE RECORD ===
-        case 'query':
-            if (target && ledger[target]) {
-                const item = ledger[target];
-                printOutput(
-                    `[REGISTRY BLOCK: ${target.toUpperCase()}]\n` +
-                    `--------------------------------------\n` +
-                    `DESIGNATION: ${item.name}\n` +
-                    `ROLE INDEX : ${item.role}\n` +
-                    `INTEGRITY  : ${item.integrity}\n` +
-                    `RAM OFFSET : ${item.offset}\n` +
-                    `DIAGNOSTIC : ${item.notes}`
-                );
-            } else {
-                printOutput(`Query Exception: Missing or unindexed target [${parts[1] || ''}].`);
-            }
-            break;
-
-        // === UPDATE NOTES INTERNALLY ===
-        case 'update':
-            if (target && ledger[target] && parts[2]) {
-                const updatedNotes = parts.slice(2).join(' ');
-                ledger[target].notes = updatedNotes;
-                
-                // Drop integrity slightly as noise is added
-                let numericalInt = parseFloat(ledger[target].integrity);
-                if (!isNaN(numericalInt)) {
-                    ledger[target].integrity = Math.max(0, (numericalInt - 2.4)).toFixed(1) + "%";
-                }
-
-                saveLedger();
-                syncManifestUI();
-                printOutput(`LEDGER COMMIT: Record [${target}] updated successfully. Stability recalculated.`);
-            } else {
-                printOutput("Syntax Exception: Use -> update [id] \"Your updated tracking log comments here\"");
-            }
-            break;
-
-        // === REGISTER FRESH ENTITY TO MEMORY ===
-        case 'register':
-            // Syntax: register [id] [Name] "Visual Profile Text"
-            if (target && parts[2] && parts[3]) {
-                if (ledger[target]) {
-                    printOutput(`Allocation Aborted: Identifier [${target}] already owns database reference.`);
-                    break;
-                }
-                
-                const entityName = parts[2];
-                const entityProfile = parts.slice(3).join(' ');
-                
-                // Create clean architecture block
-                ledger[target] = {
-                    name: entityName,
-                    role: "Unclassified System Asset / Ingestion Phase",
-                    profile: entityProfile,
-                    integrity: "100.0%",
-                    offset: "0x" + Math.floor(Math.random()*16777215).toString(16).toUpperCase(),
-                    notes: "Asset initialized remotely via system terminal execution."
-                };
-
-                saveLedger();
-                syncManifestUI();
-                printOutput(`REGISTRATION LOGGED: Target [${entityName}] injected into secure storage database.`);
-            } else {
-                printOutput("Syntax Exception: Use -> register [id] [Name] \"Visual description profile details\"");
-            }
-            break;
-
-        case 'manifest':
-            document.getElementById('manifest-sector').scrollIntoView({ behavior: 'smooth' });
-            printOutput("Display context localized to Manifest Matrix.");
-            break;
-
-        case 'clear':
-            terminalOutput.innerText = "Buffer purged. System ready.";
-            break;
-
-        case 'status':
-            printOutput("ANALYSIS COMPLETE:\nLocal Drift: 4.14ms\nRender Integrity: 88.2%\nThreat Vector: Finch [UNINDEXED]");
-            break;
-
-        case 'diagnose':
-            printOutput("CRITICAL WARN: Executing structural diagnostic. Reality variance detected.");
-            screen.classList.add('screen-tear');
-            setTimeout(() => {
-                screen.classList.remove('screen-tear');
-                printOutput("Diagnostic complete. Consensus stabilized manually by Agent Vance.");
-            }, 1500);
-            break;
-
-        default:
-            printOutput(`Command exception: '${cmd}' unrecognized. Execution aborted.`);
-    }
-}
-function applyDynamicCorruption() {
-    for (const key in ledger) {
-        const entity = ledger[key];
-        const row = document.querySelector(`tr[data-char="${key}"]`);
-        if (row) {
-            // Convert "74.2%" string to a raw number
-            const integrityNum = parseFloat(entity.integrity) || 100;
-            const loss = 100 - integrityNum;
-            
-            // Inject structural layout shifts directly into the DOM node
-            row.style.setProperty('--loss-ratio', `${loss}`);
-            row.style.setProperty('--blur-strength', `${(loss * 0.05).toFixed(2)}px`);
-            row.style.setProperty('--skew-angle', `${(loss * 0.3).toFixed(1)}deg`);
+    // === NAVBAR SYSTEM AUTOMATION FUNCTIONS ===
+    function updateSystemClock() {
+        const clockElement = document.getElementById('system-clock');
+        if (clockElement) {
+            const now = new Date();
+            clockElement.innerText = now.toLocaleTimeString('en-US', { hour12: false }) + " SYSTEM_CLK";
         }
     }
-}
+    setInterval(updateSystemClock, 1000);
+    updateSystemClock();
+
+    function purgeSystemMemory() {
+        if (confirm("CRITICAL DIRECTIVE: Clear local memory banks and reset timeline variables back to default values?")) {
+            localStorage.removeItem('latency_ledger');
+            printOutput("SYSTEM WARNING: Core memory banks purged. Re-initializing terminal defaults...");
+            setTimeout(() => { window.location.reload(); }, 1000);
+        }
+    }
+</script>
 </body>
-<footer class="system-footer">
-    <div class="footer-grid">
-        <div class="footer-panel">
-            <span class="panel-label">LOCATION REFS</span>
-            <div class="panel-data">LOC // SECTOR-04</div>
-            <div class="panel-data">SUBSTRUCTURE // LEVEL-B</div>
-        </div>
-        <div class="footer-panel">
-            <span class="panel-label">METRIC QUANTUM</span>
-            <div class="panel-data">DRIFT: <span id="footer-drift">4.14ms</span></div>
-            <div class="panel-data">RENDER INT: <span id="footer-integrity">88.2%</span></div>
-        </div>
-        <div class="footer-panel">
-            <span class="panel-label">CORE COMPILE</span>
-            <div class="panel-data">ENGINE // SUBSTRATE.v2</div>
-            <div class="panel-data">TARGET // LATENCY_LOG</div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="copyright">RESTRICTED DATA SYSTEM // AUTHORIZED PERSONNEL ONLY</div>
-        <div class="system-sig">0x00FF4A_ALPHA</div>
-    </div>
-</footer>
+</html>
