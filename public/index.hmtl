@@ -6,77 +6,136 @@
     <title>THE LATENCY ARCHIVE</title>
     <style>
         :root {
-            --bg-color: #050505;
-            --text-color: #00ff66; 
-            --dim-text: #008833;
-            --alert-color: #ff3333;
+            --bg-color: #020703;
+            --text-color: #33ff66; 
+            --dim-text: #0d4d1a;
+            --alert-color: #ff1111;
+            --vance-glow: #11aa44;
+            --caso-glow: #00ffff;
+            --finch-glow: #ff0055;
             --font-mono: 'Courier New', Courier, monospace;
         }
 
+        /* === ENHANCEMENT: PHOSPHOR BURN-IN & RADIAL VIGNETTE MASK === */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-mono);
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
             overflow-x: hidden;
+            position: relative;
+            background-image: radial-gradient(circle, rgba(5, 25, 10, 0.4) 0%, rgba(0,0,0,0.95) 100%);
         }
 
+        /* === ENHANCEMENT: HARD CRT RASTER SCANLINE LAYER === */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            z-index: 9999;
+            background-size: 100% 5px, 4px 100%;
+            pointer-events: none;
+        }
+
+        /* === ENHANCEMENT: BRUTALIST GRID FRAME CONTROLLER === */
         .container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
+            background: rgba(2, 10, 4, 0.7);
+            padding: 30px;
+            border: 2px solid var(--dim-text);
+            box-shadow: 0 0 30px rgba(13, 77, 26, 0.3);
             position: relative;
         }
 
+        /* === ENHANCEMENT: POWER TERMINAL FLICKER === */
         header {
-            border-bottom: 2px double var(--text-color);
-            padding-bottom: 20px;
+            border-bottom: 4px double var(--text-color);
+            padding-bottom: 25px;
             margin-bottom: 40px;
+            animation: terminal-flicker 0.25s infinite;
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 2.3rem;
             margin: 0;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(51, 255, 102, 0.8);
         }
 
         h2 {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            margin-top: 50px;
             text-transform: uppercase;
-            border-bottom: 1px dashed var(--text-color);
-            padding-bottom: 5px;
-            margin-top: 40px;
+            border-bottom: 2px dashed var(--text-color);
+            padding-bottom: 8px;
         }
 
+        /* === ENHANCEMENT: DOUBLE-BORDER MATRIX MATRIX === */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background: rgba(0, 0, 0, 0.6);
         }
 
-        th, td {
-            text-align: left;
-            padding: 12px;
+        th {
+            background-color: var(--dim-text);
+            color: var(--bg-color);
+            padding: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: 1px solid var(--text-color);
+        }
+
+        td {
+            padding: 15px;
             border: 1px solid var(--dim-text);
             vertical-align: top;
         }
 
-        th {
-            background-color: rgba(0, 255, 102, 0.05);
-            text-transform: uppercase;
+        /* === ENHANCEMENT: CHARACTER CONTEXT MATRICES (VANCE / CASO / FINCH) === */
+        tr[data-char="vance"] {
+            color: #88dd99;
+            /* Shadow Lag Effect */
+            text-shadow: 3px 2px 2px rgba(17, 170, 68, 0.4);
+        }
+
+        tr[data-char="caso"] {
+            color: #ffffff;
+            font-weight: bold;
+            /* Stabilized HD Render */
+            text-shadow: 0 0 10px var(--caso-glow), 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        tr[data-char="finch"] {
+            color: #ff99bb;
+            /* Active Corruption Loop */
+            animation: finch-decay 1.5s infinite linear;
         }
 
         .log-container {
             margin-top: 20px;
         }
 
+        /* === ENHANCEMENT: HARD-LINE LOG STACKING === */
         .log {
-            margin-bottom: 35px;
-            padding-left: 15px;
-            border-left: 3px solid var(--text-color);
-            transition: opacity 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+            padding: 25px;
+            border-left: 4px solid var(--text-color);
+            border-right: 1px solid var(--dim-text);
+            border-top: 1px solid var(--dim-text);
+            border-bottom: 1px solid var(--dim-text);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
         }
 
         .log.hidden {
@@ -84,34 +143,37 @@
         }
 
         .log-meta {
-            color: var(--dim-text);
-            font-size: 0.9rem;
+            color: #ffffff;
+            font-size: 0.85rem;
+            background: var(--dim-text);
+            display: inline-block;
+            padding: 3px 10px;
+            margin-bottom: 15px;
             font-weight: bold;
-            margin-bottom: 8px;
-            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Terminal Footer Styles */
+        /* === INTERACTIVE CONSOLE INTERFACE === */
         footer {
             margin-top: 60px;
-            border-top: 1px solid var(--dim-text);
-            padding-top: 20px;
+            border-top: 3px double var(--dim-text);
+            padding-top: 25px;
             padding-bottom: 40px;
         }
 
         .terminal-interface {
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--dim-text);
-            padding: 15px;
-            border-radius: 4px;
+            background-color: #000000;
+            border: 2px solid var(--text-color);
+            box-shadow: 0 0 20px rgba(51, 255, 102, 0.2);
+            padding: 20px;
         }
 
         .terminal-output {
-            max-height: 150px;
+            max-height: 180px;
             overflow-y: auto;
             font-size: 0.9rem;
-            color: var(--dim-text);
-            margin-bottom: 10px;
+            color: #22cc55;
+            margin-bottom: 15px;
             white-space: pre-wrap;
         }
 
@@ -121,30 +183,48 @@
         }
 
         .terminal-prompt {
-            margin-right: 10px;
-            user-select: none;
+            margin-right: 12px;
+            color: var(--text-color);
+            font-weight: bold;
         }
 
         .terminal-field {
             flex-grow: 1;
             background: transparent;
             border: none;
-            color: var(--text-color);
+            color: #ffffff;
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 1.1rem;
             outline: none;
+            text-shadow: 0 0 6px var(--text-color);
         }
 
-        /* Screen Tear Glitch Effect Triggered via JS */
+        /* SCREEN TEAR GLITCH TRANSITION ENGINE */
         .screen-tear {
-            animation: tear 0.4s linear infinite;
+            animation: tear-effect 0.3s infinite linear;
         }
 
-        @keyframes tear {
-            0% { transform: skewX(0deg); filter: hue-rotate(0deg); }
-            10% { transform: skewX(-5deg) translateX(-5px); filter: invert(1); }
-            20% { transform: skewX(8deg) translateY(2px); }
-            30% { transform: skewX(0deg); }
+        /* === ANIMATION SUBSYSTEMS === */
+        @keyframes terminal-flicker {
+            0% { opacity: 0.97; }
+            50% { opacity: 1; }
+            100% { opacity: 0.96; }
+        }
+
+        @keyframes finch-decay {
+            0% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
+            94% { transform: skewX(0deg); filter: blur(0px); }
+            95% { transform: skewX(-15deg); filter: blur(1px); color: #ff1111; }
+            97% { transform: skewX(20deg); text-shadow: -3px 0 #00ffff, 3px 0 #ff0055; }
+            99% { transform: skewX(-5deg); filter: blur(2px); }
+            100% { transform: skewX(0deg); filter: blur(0px); text-shadow: 0 0 2px var(--finch-glow); }
+        }
+
+        @keyframes tear-effect {
+            0% { transform: skewX(0deg) scaleY(1); filter: hue-rotate(0deg) invert(0); }
+            15% { transform: skewX(-7deg) scaleY(1.05); filter: invert(0.5); }
+            30% { transform: skewX(11deg) translateX(-4px); }
+            45% { transform: skewX(0deg); filter: hue-rotate(90deg); }
             100% { transform: skewX(0deg); }
         }
     </style>
@@ -171,17 +251,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr data-char="vance">
                         <td><strong>Vance</strong></td>
                         <td>Host Verification Agent / Low-Priority Glitch</td>
                         <td>Cillian Murphy type; frayed, hollowed eyes, shadow lags behind.</td>
                     </tr>
-                    <tr>
+                    <tr data-char="caso">
                         <td><strong>Coordinator Caso</strong></td>
                         <td>High-Priority Render / High-Definition Anchor</td>
                         <td>Ana de Armas type; cinematic perfection, stabilizes local reality.</td>
                     </tr>
-                    <tr>
+                    <tr data-char="finch">
                         <td><strong>Finch</strong></td>
                         <td>Corrupted Element / Active Corruption</td>
                         <td>Mia Goth type; erratic, ghost images, numb to reality collapse.</td>
@@ -256,8 +336,6 @@
     const terminalOutput = document.getElementById('output-screen');
     const logs = document.querySelectorAll('.log');
     const screen = document.getElementById('terminal-screen');
-
-    const history = [];
 
     terminalInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
