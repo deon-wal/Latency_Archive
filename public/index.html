@@ -2,15 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE LATENCY ARCHIVE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Latency Archive: Preserving data integrity through high-fidelity temporal storage solutions.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+    <title>THE LATENCY ARCHIVE | Temporal Data Solutions</title>
+    <style>
+        :root { 
+            --bg: #050505; --main-green: #00ff41; --dopamine: #ff00ff; 
+            --text: #e0e0e0; --card-bg: #111;
+        }
+        /* Dynamic Theming */
+        @media (prefers-color-scheme: light) {
+            :root { --bg: #f4f4f4; --text: #1a1a1a; --card-bg: #fff; }
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; margin: 0; padding: 2rem; transition: 0.3s; }
+        
+        /* Kinetic Typography */
+        h1 { font-size: clamp(2rem, 8vw, 4rem); animation: drift 5s infinite ease-in-out; }
+        @keyframes drift { 0%, 100% { letter-spacing: normal; } 50% { letter-spacing: 0.5rem; } }
+
+        /* Bento Grid & Organic Shapes */
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { 
+            background: var(--card-bg); padding: 2rem; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+            border: 2px solid var(--main-green); transition: transform 0.3s;
+        }
+        .card:hover { transform: scale(1.02); border-color: var(--dopamine); }
+
+        /* Micro-Animations & Accessibility */
+        button { 
+            background: var(--main-green); border: none; padding: 1.5rem 2.5rem; 
+            cursor: pointer; font-weight: bold; min-width: 44px; min-height: 44px; /* WCAG Target */
+            transition: 0.2s;
+        }
+        button:active { transform: scale(0.95); }
+
+        /* Human Scribble Effect */
+        .scribble { border: 2px dashed var(--dopamine); padding: 5px; transform: rotate(-2deg); display: inline-block; }
+    </style>
 </head>
 <body>
-    <h1>THE LATENCY ARCHIVE</h1>
-    <div id="content">System Loading...</div>
+
+    <header>
+        <h1>THE LATENCY ARCHIVE</h1>
+        <p>Your <span class="scribble">verified</span> temporal data integrity.</p>
+    </header>
+
+    <main>
+        <section id="personalized-welcome">
+            <h2 id="user-greeting">Loading session...</h2>
+        </section>
+
+        <section class="bento-grid">
+            <article class="card" aria-label="Data Point Alpha">
+                <h3>Alpha Vector</h3>
+                <p>Integrity: 99.9%</p>
+            </article>
+            <article class="card" aria-label="Data Point Beta">
+                <h3>Beta Vector</h3>
+                <p>Integrity: 98.4%</p>
+            </article>
+        </section>
+
+        <button aria-label="Initiate Archive Access">INITIATE ACCESS</button>
+    </main>
+
+    <footer style="margin-top: 3rem; opacity: 0.6;">
+        <p>Technical Security: Encryption Active | Audit Log: Ready</p>
+    </footer>
 
     <script>
-        document.getElementById('content').innerText = "Data Loaded Successfully";
-        console.log("Script is running!");
+        // AI-Powered Personalization: Remembers previous interaction
+        const visited = localStorage.getItem('visited');
+        const hour = new Date().getHours();
+        const greeting = hour < 12 ? "Morning" : hour < 18 ? "Afternoon" : "Evening";
+        
+        document.getElementById('user-greeting').innerText = visited 
+            ? `Welcome back, Operator. Good ${greeting}.` 
+            : `System initialized. Good ${greeting}, Operator.`;
+        
+        localStorage.setItem('visited', 'true');
+
+        // Micro-Interaction: Console log feedback
+        console.log("Archive loaded with aesthetic modifiers.");
     </script>
 </body>
 </html>
